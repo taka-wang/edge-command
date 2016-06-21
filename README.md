@@ -8,18 +8,18 @@
 
 - Verb: **GET**
 - URI: /mb/tcp/**{fc}**/read
-- query string: ?ip=**{ip}**&port=**{port}**&id=**{id}**&s=**{reg}**[&l=**{len}**]
+- query string: ?ip=**{ip}**&port=**{port}**&slave=**{slave}**&s=**{addr}**&l=**{len}**
 
 |param|desc|type|range|example|optional|
 |:--|:--|:--|:--|:--|:--|
 |fc|read function code|int|[1,4]|1|-|
 |ip|IP address|string|-| 127.0.0.1|-|  
 |port|port number|int|[1,65535]|502|default 502|
-|id|device id|int|[1, 253]|1|-|
-|reg|register start addr|int|-|23|-|
+|slave|device id|int|[1, 253]|1|-|
+|addr|register start addr|int|-|23|-|
 |len|register length|int|-|20|default 1|
 
-- Request single example
+- Request single coil/register example
 
     - port: 502
     - length: 1
@@ -29,7 +29,7 @@ http://127.0.0.1/api/mb/tcp/1/read?ip=192.168.3.2&id=1&s=10
 
 ```
 
-- Response single example
+- Response single coil/register example
 
 ```javascript
 // sucess
@@ -44,13 +44,13 @@ http://127.0.0.1/api/mb/tcp/1/read?ip=192.168.3.2&id=1&s=10
 }
 ```
 
-- [FC2] Request example
+- [FC2] Request multiple coils/registers example
 
 ```bash
 http://127.0.0.1/api/mb/tcp/2/read?ip=192.168.3.2&port=503&id=1&s=10&l=10
 ```
 
-- [FC2] Response example
+- [FC2] Response multiple coils/registers example
 
 
 ```javascript
@@ -70,7 +70,7 @@ http://127.0.0.1/api/mb/tcp/2/read?ip=192.168.3.2&port=503&id=1&s=10&l=10
 
 ##### @Request
 
-- **Topic**: /mb/tcp/**{fc}**/req
+- **Topic**: ep/mb/tcp/**{fc}**/req
 
 |param|desc|type|range|example|optional|
 |:--|:--|:--|:--|:--|:--|
@@ -82,14 +82,14 @@ http://127.0.0.1/api/mb/tcp/2/read?ip=192.168.3.2&port=503&id=1&s=10&l=10
 |:--|:--|:--|:--|:--|:--|
 |ip|IP address|string|-| 127.0.0.1|-|  
 |port|port number|int|[1,65535]|502|default 502|
-|id|device id|int|[1, 253]|1|-|
-|reg|register start addr|int|-|23|-|
+|slave|device id|int|[1, 253]|1|-|
+|addr|register start addr|int|-|23|-|
 |len|register length|int|-|20|default 1|
 
 ##### @Response
 
-- **Topic**: /mb/tcp/**{fc}**/res
-- **Wildcard**: /mb/tcp/+/res
+- **Topic**: ep/mb/tcp/**{fc}**/res
+- **Wildcard**: ep/mb/tcp/+/res
 
 |param|desc|type|range|example|optional|
 |:--|:--|:--|:--|:--|:--|
@@ -102,30 +102,35 @@ http://127.0.0.1/api/mb/tcp/2/read?ip=192.168.3.2&port=503&id=1&s=10&l=10
 |data|data array|array|[1, 2, 3, 4, 5, 6, 15, 16]|fail|
 |status|status string|string|"ok"|-|
 
-- [FC1] Request example 
+- Request single coil/register example
+
+
 
 ```javascript
+// topic: ep/mb/tcp/1/req
 {
     "ip": "192.168.3.2",
     "port": "502",
-    "id": 22,
-    "reg": 250
+    "slave": 22,
+    "addr": 250
 }
 ```
 
-- [FC1] Response example 
+- Response single coil/register example
 
 ```javascript
+// topic: ep/mb/tcp/1/res or /mb/tcp/+/res
 {
     "data": [1,2,3,4],
     "status": "ok"
 }
 ```
 
-- [FC2] Request example
+- Request multiple coils/registers example
 
 
 ```javascript
+// topic: ep/mb/tcp/2/req
 {
     "ip": "192.168.3.2",
     "port": "502",
@@ -135,9 +140,10 @@ http://127.0.0.1/api/mb/tcp/2/read?ip=192.168.3.2&port=503&id=1&s=10&l=10
 }
 ```
 
-- [FC2] Response example 
+- Response multiple coils/registers example
 
 ```javascript
+// topic: ep/mb/tcp/2/res or /mb/tcp/+/res
 {
     "data": [1,2,3,4],
     "status": "ok"
