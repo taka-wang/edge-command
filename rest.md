@@ -31,7 +31,7 @@
 - **[Response]** read single coil/register example
 
     - Success:
-    ```javascript
+    ```JavaScript
     {
         "status": "ok",
         "data": [1]
@@ -39,7 +39,7 @@
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
@@ -54,7 +54,7 @@
 - **[Response]** read multiple coils/registers example
 
     - Success:
-    ```javascript
+    ```JavaScript
     {
         "status": "ok",
         "data": [1, 0, 1, 0, 0, 0, 0, 0, 1, 0]
@@ -62,7 +62,7 @@
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
@@ -94,7 +94,7 @@
     http://127.0.0.1/api/mb/tcp/fc/5
     ```
     
-    ```javascript
+    ```JavaScript
     {
         "ip": "192.168.3.2",
         "slave": 22,
@@ -107,14 +107,14 @@
 - **[Response]** write single coil/register example
 
     - Success:
-    ```javascript
+    ```JavaScript
     {
         "status": "ok",
     }
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
@@ -126,7 +126,7 @@
     http://127.0.0.1/api/mb/tcp/fc/5
     ```
     
-    ```javascript
+    ```JavaScript
     {
         "ip": "192.168.3.2",
         "port": "503",
@@ -140,14 +140,14 @@
 - **[Response]** write multiple coils/registers example
 
     - Success:
-    ```javascript
+    ```JavaScript
     {
         "status": "ok",
     }
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
@@ -171,7 +171,7 @@
 - **[Response]** example
 
     - Success:
-    ```javascript
+    ```JavaScript
     {
         "status": "ok",
         "timeout": 210000
@@ -179,7 +179,7 @@
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
@@ -198,7 +198,7 @@
     ```
     
     - Payload:
-    ```javascript
+    ```JavaScript
     {
         "timeout": 210000
     }
@@ -207,14 +207,14 @@
 - **[Response]** example
 
     - Success:
-    ```javascript
+    ```JavaScript
     {
         "status": "ok"
     }
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
@@ -249,7 +249,7 @@
     ```
     
     - Payload:
-    ```javascript
+    ```JavaScript
     {
         "fc": 1,
         "ip": "192.168.3.2",
@@ -264,14 +264,14 @@
 - **[Response]** example
 
     - Success:
-    ```javascript
+    ```JavaScript
     {
         "status": "ok"
     }
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
@@ -291,7 +291,7 @@
     ```
     
     - Payload:
-    ```javascript
+    ```JavaScript
     {
         "interval" : 3
     }
@@ -300,14 +300,14 @@
 - **[Response]** example
 
     - Success:
-    ```javascript
+    ```JavaScript
     {
         "status": "ok"
     }
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
@@ -331,7 +331,7 @@
     - Success:
         - **Note:** enabled field
     
-    ```javascript
+    ```JavaScript
     {
         "fc": 1,
         "ip": "192.168.3.2",
@@ -346,7 +346,7 @@
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "not exist"
     }
@@ -369,14 +369,14 @@
 - **[Response]** example
 
     - Success:
-    ```javascript
+    ```JavaScript
     {
         "status": "ok"
     }
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
@@ -399,7 +399,7 @@
 - **[Response]** example
 
     - Success (len=1):
-    ```javascript
+    ```JavaScript
     {
         "status": "ok",
         "data":[{"data": [1], "ts": 2012031203},
@@ -409,7 +409,7 @@
     ```
     
     - Success (len=n):
-    ```javascript
+    ```JavaScript
     {
         "status": "ok",
         "data":[{"data": [1,0,1], "ts": 2012031203},
@@ -419,7 +419,7 @@
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "not exist"
     }
@@ -438,7 +438,7 @@
 
     ```
     - Payload:
-    ```javascript
+    ```JavaScript
     {
         "enable": true
     }
@@ -447,14 +447,14 @@
 - **[Response]** example
 
     - Success:
-    ```javascript
+    ```JavaScript
     {
         "status": "ok"
     }
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
@@ -475,7 +475,7 @@
 
     - Success:
     
-    ```javascript
+    ```JavaScript
     {
         "status": "ok",
         "polls": [
@@ -506,7 +506,7 @@
 
     - Fail:
     
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
@@ -526,14 +526,14 @@
 - **[Response]** example
 
     - Success:
-    ```javascript
+    ```JavaScript
     {
         "status": "ok"
     }
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
@@ -552,7 +552,7 @@
 
     ```
     - Payload:
-    ```javascript
+    ```JavaScript
     {
         "enable": true
     }
@@ -561,14 +561,14 @@
 - **[Response]** example
 
     - Success:
-    ```javascript
+    ```JavaScript
     {
         "status": "ok"
     }
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
@@ -588,7 +588,7 @@
     ```
 
     - Payload:
-    ```javascript
+    ```JavaScript
     {
         "polls": [
              {
@@ -619,14 +619,14 @@
 - **[Response]** example
 
     - Success:
-    ```javascript
+    ```JavaScript
     {
         "status": "ok"
     }
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
@@ -650,7 +650,7 @@
 - **[Response]** example
 
     - Success:
-    ```javascript
+    ```JavaScript
     {
         "status": "ok",
         "polls": [
@@ -680,7 +680,7 @@
     ```
 
     - Fail:
-    ```javascript
+    ```JavaScript
     {
         "status": "timeout"
     }
