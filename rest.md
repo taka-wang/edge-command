@@ -20,8 +20,8 @@
 
 - **[Request]** read single coil/register example
 
-    - port: 502 [default]
-    - len: 1 [default]
+    - port: 502 **[default]**
+    - len: 1 **[default]**
     
     ```bash
     http://127.0.0.1/api/mb/tcp/fc/1?ip=192.168.3.2&slave=1&addr=10
@@ -46,8 +46,6 @@
     ```
 
 - **[Request]** read multiple coils/registers example
-
-    - fc: 2
 
     ```bash
     http://127.0.0.1/api/mb/tcp/fc/2?ip=192.168.3.2&port=503&slave=1&addr=10&len=10
@@ -78,12 +76,17 @@
 - URI: /api/mb/tcp/fc/**{fc}**
 
 |param|desc|type|range|example|optional|
-|:--|:--|:--|:--|:--|:--|
-|fc|function code|integer|[5, 6, 15, 16]|1|-|
+|:----|:------------------|:------------|:----------|:---------|:-----------|
+|fc   |function code      |integer      |[5,6,15,16]|1         |-           |
+|ip   |IP address         |string       |-          |127.0.0.1 |-           |  
+|port |port number        |string       |[1,65535]  |502       |default: 502|
+|slave|slave id           |integer      |[1, 253]   |1         |-           |
+|addr |register start addr|integer      |-          |23        |-           |
+|len  |register length    |integer      |-          |20        |default: 1  |
+|data |data to be write   |integer/array|
 
 - **[Request]** write single coil/register example
 
-    - fc: 5
     - port: 502
 
     ```bash
@@ -116,12 +119,10 @@
     }
     ```
 
-- **[Request]** multiple coils/registers write example
-
-    - fc: 5
+- **[Request]** write multiple coils/registers example
 
     ```bash
-    http://127.0.0.1/api/mb/tcp/5/write
+    http://127.0.0.1/api/mb/tcp/fc/5
     ```
     
     ```javascript
@@ -129,14 +130,13 @@
         "ip": "192.168.3.2",
         "port": "503",
         "slave": 22,
-        "tid": 1,
         "addr": 80,
         "len": 4,
         "data": [1, 2, 3, 4]
     }
     ```
 
-- **[Response]** multiple coils/registers write example
+- **[Response]** write multiple coils/registers example
 
     - success
     ```javascript
@@ -152,10 +152,70 @@
     }
     ```
 
-### 1.3 Set timeout
+### 1.3 Get TCP connection timeout
 
-### 1.4 Get timeout
+- Verb: **GET**
+- URI: /api/mb/tcp/timeout
 
+|param   |desc           |type         |range      |example   |
+|:-------|:--------------|:------------|:----------|:---------|
+|timeout |timeout in usec|integer      |[200000~)  |210000    |
+
+- **[Request]** example
+
+    ```bash
+        http://127.0.0.1/api/mb/tcp/timeout
+    ```
+
+- **[Response]** example
+
+    - success
+    ```javascript
+    {
+        "status": "ok",
+        "timeout": 210000
+    }
+    ```
+
+    - fail
+    ```javascript
+    {
+        "status": "timeout"
+    }
+    ```
+
+### 1.4 Set TCP connection timeout
+
+- Verb: **POST**
+- URI: /api/mb/tcp/timeout
+
+- **[Request]** example
+
+    ```bash
+        http://127.0.0.1/api/mb/tcp/timeout
+    ```
+    
+    ```javascript
+    {
+        "timeout": 210000
+    }
+    ```
+
+- **[Response]** example
+
+    - success
+    ```javascript
+    {
+        "status": "ok"
+    }
+    ```
+
+    - fail
+    ```javascript
+    {
+        "status": "timeout"
+    }
+    ```
 
 ## 2. Polling requests
 
