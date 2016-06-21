@@ -1,6 +1,6 @@
 # MQTT
 
-## 1. One-off request
+## 1. One-off requests
 
 ### @Read coil/register 
 

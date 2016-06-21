@@ -1,7 +1,7 @@
 # Restful API 
 
 
-## 1. One-off request
+## 1. One-off requests
 
 ### 1.1 Read coil/register 
 
@@ -11,7 +11,7 @@
 
 |param|desc|type|range|example|optional|
 |:--|:--|:--|:--|:--|:--|
-|fc|read function code|integer|[1,4]|1|-|
+|fc|function code|integer|[1,4]|1|-|
 |ip|IP address|string|-| 127.0.0.1|-|  
 |port|port number|string|[1,65535]|502|default: 502|
 |slave|slave id|integer|[1, 253]|1|-|
@@ -80,7 +80,7 @@
 
 |param|desc|type|range|example|optional|
 |:--|:--|:--|:--|:--|:--|
-|fc|read function code|integer|[5, 6, 15, 16]|1|-|
+|fc|function code|integer|[5, 6, 15, 16]|1|-|
 
 - **[Request]** single coil/register write example
 
@@ -154,7 +154,30 @@
     ```
 
 ## 2. Polling requests
-TODO
+
+### 2.1 Add request
+### 2.2 Update request
+### 2.3 Delete request
+### 2.4 Enable request
+### 2.5 Disable request
+### 2.6 Read all requests
+### 2.7 Delete all requests
+### 2.8 Enable all requests
+### 2.9 Disable all requests
+### 2.10 Import
+### 2.11 Export
+
 
 ## 3. Filter requests
-TODO
+
+### 3.1 Add filter
+### 3.2 Update filter
+### 3.3 Delete filter
+### 3.4 Enable filter
+### 3.5 Disable filter
+### 3.6 Read all filters
+### 3.7 Delete all filters
+### 3.8 Enable all filters
+### 3.9 Disable all filters
+### 3.10 Import
+### 3.11 Export
