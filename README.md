@@ -3,8 +3,10 @@
 
 ## Table of Content
 
-1. [One-off requests](one-off.md)
-2. [Polling requests](poll.md)
-3. [Filter requests](filter.md)
+1. [Restful API](rest.md)
+2. [Websocket](websocket.md)
+3. [MQTT](mqtt.md)
+4. [ZMQ](zmq.md)
+5. [DDS](dds.md)
 
 ---
