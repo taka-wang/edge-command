@@ -2,7 +2,7 @@
 
 ## One-off request
 
-### Read
+### Read coil/register 
 
 #### Restful
 
