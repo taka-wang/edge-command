@@ -30,7 +30,7 @@
 
 - **[Response]** read single coil/register example
 
-    - success
+    - Success:
     ```javascript
     {
         "status": "ok",
@@ -38,7 +38,7 @@
     }
     ```
 
-    - fail
+    - Fail:
     ```javascript
     {
         "status": "timeout"
@@ -53,7 +53,7 @@
 
 - **[Response]** read multiple coils/registers example
 
-    - success
+    - Success:
     ```javascript
     {
         "status": "ok",
@@ -61,7 +61,7 @@
     }
     ```
 
-    - fail
+    - Fail:
     ```javascript
     {
         "status": "timeout"
@@ -106,14 +106,14 @@
 
 - **[Response]** write single coil/register example
 
-    - success
+    - Success:
     ```javascript
     {
         "status": "ok",
     }
     ```
 
-    - fail
+    - Fail:
     ```javascript
     {
         "status": "timeout"
@@ -139,14 +139,14 @@
 
 - **[Response]** write multiple coils/registers example
 
-    - success
+    - Success:
     ```javascript
     {
         "status": "ok",
     }
     ```
 
-    - fail
+    - Fail:
     ```javascript
     {
         "status": "timeout"
@@ -170,7 +170,7 @@
 
 - **[Response]** example
 
-    - success
+    - Success:
     ```javascript
     {
         "status": "ok",
@@ -178,7 +178,7 @@
     }
     ```
 
-    - fail
+    - Fail:
     ```javascript
     {
         "status": "timeout"
@@ -206,14 +206,14 @@
 
 - **[Response]** example
 
-    - success
+    - Success:
     ```javascript
     {
         "status": "ok"
     }
     ```
 
-    - fail
+    - Fail:
     ```javascript
     {
         "status": "timeout"
