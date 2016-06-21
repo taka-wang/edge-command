@@ -9,7 +9,7 @@
 - URI: /api/mb/tcp/fc/**{fc}**
 - query string: ?ip=**{ip}**&port=**{port}**&slave=**{slave}**&addr=**{addr}**&len=**{len}**
 
-|param|desc|type|range|example|optional|
+|param|desc               |type   |range     |example   |optional    |
 |:----|:------------------|:------|:---------|:---------|:-----------|
 |fc   |function code      |integer|[1,4]     |1         |-           |
 |ip   |IP address         |string |-         |127.0.0.1 |-           |  
@@ -75,15 +75,16 @@
 - Verb: **POST**
 - URI: /api/mb/tcp/fc/**{fc}**
 
-|param|desc|type|range|example|optional|
-|:----|:------------------|:------------|:----------|:---------|:-----------|
-|fc   |function code      |integer      |[5,6,15,16]|1         |-           |
-|ip   |IP address         |string       |-          |127.0.0.1 |-           |  
-|port |port number        |string       |[1,65535]  |502       |default: 502|
-|slave|slave id           |integer      |[1, 253]   |1         |-           |
-|addr |register start addr|integer      |-          |23        |-           |
-|len  |register length    |integer      |-          |20        |default: 1  |
-|data |data to be write   |integer/array|
+|param|desc               |type         |range          |example   |optional    |
+|:----|:------------------|:------------|:--------------|:---------|:-----------|
+|fc   |function code      |integer      |**[5,6,15,16]**|1         |-           |
+|ip   |IP address         |string       |-              |127.0.0.1 |-           |  
+|port |port number        |string       |[1,65535]      |502       |default: 502|
+|slave|slave id           |integer      |[1, 253]       |1         |-           |
+|addr |register start addr|integer      |-              |23        |-           |
+|len  |register length    |integer      |-              |20        |default: 1  |
+|data |data to be write   |integer/array|-              |          |            |
+
 
 - **[Request]** write single coil/register example
 
@@ -191,10 +192,12 @@
 
 - **[Request]** example
 
+    - URI:
     ```bash
         http://127.0.0.1/api/mb/tcp/timeout
     ```
     
+    - Payload:
     ```javascript
     {
         "timeout": 210000
@@ -217,34 +220,35 @@
     }
     ```
 
+---
+
 ## 2. Polling requests
 
-### 2.1 Add request
-- Verb: **POST**
-- URI: api/mb/tcp/p/{name}
+|param       |desc               |type   |range     |example   |optional    |
+|:-----------|:------------------|:------|:---------|:---------|:-----------|
+|fc          |function code      |integer|[1,4]     |1         |-           |
+|ip          |IP address         |string |-         |127.0.0.1 |-           |  
+|port        |port number        |string |[1,65535] |502       |default: 502|
+|slave       |slave id           |integer|[1, 253]  |1         |-           |
+|addr        |register start addr|integer|-         |23        |-           |
+|len         |register length    |integer|-         |20        |default: 1  |
+|**name**    |request/sensor name|string |no space  |led_1     |_           |
+|**interval**|polling interval s |integer|[1~)      |3         |-           |
 
-|param|desc|type|range|example|optional|
-|:--|:--|:--|:--|:--|:--|
-|name|request name|string|-|led_1|unique|
+### 2.1 Add request
+
+- Verb: **POST**
+- URI: /api/mb/tcp/poll/**{name}**
 
 - **[Request]** example
 
-|param|desc|type|range|example|optional|
-|:--|:--|:--|:--|:--|:--|
-|fc|function code|integer|[1,4]|1|-|
-|ip|IP address|string|-| 127.0.0.1|-|  
-|port|port number|string|[1,65535]|502|default: 502|
-|slave|slave id|integer|[1, 253]|1|-|
-|addr|register start addr|integer|-|23|-|
-|len|register length|integer|-|20|default: 1|
-|interval|polling interval|integer|?|20|-|
-
-
+    - URI:
     ```bash
-    http://127.0.0.1/api/mb/tcp/p/led_1
+    http://127.0.0.1/api/mb/tcp/poll/led_1
 
     ```
-
+    
+    - Payload:
     ```javascript
     {
         "fc": 1,
@@ -259,93 +263,467 @@
 
 - **[Response]** example
 
-    - success
+    - Success:
     ```javascript
     {
-        "status": "ok",
+        "status": "ok"
     }
     ```
 
-    - fail
+    - Fail:
     ```javascript
     {
         "status": "timeout"
     }
     ```
-- **[Data]** example
-    
-    - N/A
-    - api/mb/tcp/p/**{name}**/data
 
+### 2.2 Update request (interval)
 
-### 2.2 Update request
 - Verb: **PUT**
-- URI: api/mb/tcp/p/**{name}**
+- URI: /api/mb/tcp/poll/**{name}**
 
-### 2.3 Read request
+- **[Request]** example
+
+    - URI:
+    ```bash
+    http://127.0.0.1/api/mb/tcp/poll/led_1
+
+    ```
+    
+    - Payload:
+    ```javascript
+    {
+        "interval" : 3
+    }
+    ```
+
+- **[Response]** example
+
+    - Success:
+    ```javascript
+    {
+        "status": "ok"
+    }
+    ```
+
+    - Fail:
+    ```javascript
+    {
+        "status": "timeout"
+    }
+    ```
+
+### 2.3 Read request status
+
 - Verb: **GET**
-- URI: api/mb/tcp/p/**{name}**
+- URI: /api/mb/tcp/poll/**{name}**
 
-### 2.3 Delete request
+- **[Request]** example
+
+    - URI:
+    ```bash
+    http://127.0.0.1/api/mb/tcp/poll/led_1
+
+    ```
+
+- **[Response]** example
+
+    - Success:
+        - **Note:** enabled field
+    
+    ```javascript
+    {
+        "fc": 1,
+        "ip": "192.168.3.2",
+        "port": "502",
+        "slave": 22,
+        "addr": 250,
+        "len": 10,
+        "interval" : 3,
+        "status": "ok",
+        "enabled": true
+    }
+    ```
+
+    - Fail:
+    ```javascript
+    {
+        "status": "not exist"
+    }
+    ```
+
+### 2.4 Delete request
+
 - Verb: **DELETE**
-- URI: api/mb/tcp/p/**{name}**
+- URI: /api/mb/tcp/poll/**{name}**
 
-### 2.4 Read history
+- **[Request]** example
+
+    - URI:
+    ```bash
+    http://127.0.0.1/api/mb/tcp/poll/led_1
+
+    ```
+    - **Note:** No payload!!
+
+- **[Response]** example
+
+    - Success:
+    ```javascript
+    {
+        "status": "ok"
+    }
+    ```
+
+    - Fail:
+    ```javascript
+    {
+        "status": "timeout"
+    }
+    ```
+
+### 2.5 Read history
+
 - Verb: **GET**
-- URI: api/mb/tcp/p/**{name}**/logs
+- URI: /api/mb/tcp/poll/**{name}**/logs
 
+- **[Request]** example
 
-### 2.4 Enable/Disable request
+    - URI:
+    ```bash
+    http://127.0.0.1/api/mb/tcp/poll/led_1/logs
+
+    ```
+    - **Note:** No payload!!
+
+- **[Response]** example
+
+    - Success (len=1):
+    ```javascript
+    {
+        "status": "ok",
+        "data":[{"data": [1], "ts": 2012031203},
+                {"data": [0], "ts": 2012031205},
+                {"data": [1], "ts": 2012031207}]        
+    }
+    ```
+    
+    - Success (len=n):
+    ```javascript
+    {
+        "status": "ok",
+        "data":[{"data": [1,0,1], "ts": 2012031203},
+                {"data": [1,1,1], "ts": 2012031205},
+                {"data": [0,0,1], "ts": 2012031207}]        
+    }
+    ```
+
+    - Fail:
+    ```javascript
+    {
+        "status": "not exist"
+    }
+    ```
+
+### 2.6 Enable/Disable request
+
 - Verb: **POST**
-- URI: api/mb/tcp/p/**{name}**/enable
+- URI: /api/mb/tcp/poll/**{name}**/toggle
 
-### 2.5 Read all requests
+- **[Request]** example
+
+    - URI:
+    ```bash
+    http://127.0.0.1/api/mb/tcp/poll/led_1/toggle
+
+    ```
+    - Payload:
+    ```javascript
+    {
+        "enable": true
+    }
+    ```
+
+- **[Response]** example
+
+    - Success:
+    ```javascript
+    {
+        "status": "ok"
+    }
+    ```
+
+    - Fail:
+    ```javascript
+    {
+        "status": "timeout"
+    }
+    ```
+ 
+### 2.7 Read all requests
+
 - Verb: **GET**
-- URI: api/mb/tcp/p/all
+- URI: /api/mb/tcp/polls
 
-### 2.6 Delete all requests
+- **[Request]** example
+
+    - URI:
+    ```bash
+    http://127.0.0.1/api/mb/tcp/polls
+
+- **[Response]** example
+
+    - Success:
+    ```javascript
+    {
+        "status": "ok",
+        "polls": [
+             {
+                "fc": 1,
+                "ip": "192.168.3.2",
+                "port": "502",
+                "slave": 22,
+                "addr": 250,
+                "len": 10,
+                "interval" : 3,
+                "status": "ok",
+                "enabled": true
+            },
+            {
+                "fc": 1,
+                "ip": "192.168.3.2",
+                "port": "502",
+                "slave": 22,
+                "addr": 250,
+                "len": 10,
+                "interval" : 3,
+                "status": "ok",
+                "enabled": true
+            }]
+    }
+    ```
+
+    - Fail:
+    ```javascript
+    {
+        "status": "timeout"
+    }
+    ```
+
+### 2.8 Delete all requests
+
 - Verb: **DELETE**
-- URI: api/mb/tcp/p/all
+- URI: /api/mb/tcp/polls
 
-### 2.7 Enable/Disable all requests
+- **[Request]** example
+
+    - URI:
+    ```bash
+    http://127.0.0.1/api/mb/tcp/polls
+
+- **[Response]** example
+
+    - Success:
+    ```javascript
+    {
+        "status": "ok"
+    }
+    ```
+
+    - Fail:
+    ```javascript
+    {
+        "status": "timeout"
+    }
+    ```
+
+### 2.9 Enable/Disable all requests
+
 - Verb: **POST**
-- URI: api/mb/tcp/p/all/enable
-- URI: api/mb/tcp/p/all/disable
+- URI: /api/mb/tcp/polls/toggle
 
-### 2.8 Import
+- **[Request]** example
+
+    - URI:
+    ```bash
+    http://127.0.0.1/api/mb/tcp/polls/toggle
+
+    ```
+    - Payload:
+    ```javascript
+    {
+        "enable": true
+    }
+    ```
+
+- **[Response]** example
+
+    - Success:
+    ```javascript
+    {
+        "status": "ok"
+    }
+    ```
+
+    - Fail:
+    ```javascript
+    {
+        "status": "timeout"
+    }
+    ```
+
+### 2.10 Import requests
+
 - Verb: **POST**
-- URI: api/mb/tcp/p/import
+- URI: /api/mb/tcp/polls/import
 
-### 2.9 Export
+- **[Request]** example
+
+    - URI:
+    ```bash
+    http://127.0.0.1/api/mb/tcp/polls/import
+
+    ```
+
+    - Payload:
+    ```javascript
+    {
+        "polls": [
+             {
+                "fc": 1,
+                "ip": "192.168.3.2",
+                "port": "502",
+                "slave": 22,
+                "addr": 250,
+                "len": 10,
+                "interval" : 3,
+                "status": "ok",
+                "enabled": true
+            },
+            {
+                "fc": 1,
+                "ip": "192.168.3.2",
+                "port": "502",
+                "slave": 22,
+                "addr": 250,
+                "len": 10,
+                "interval" : 3,
+                "status": "ok",
+                "enabled": true
+            }]
+    }
+    ```
+
+- **[Response]** example
+
+    - Success:
+    ```javascript
+    {
+        "status": "ok"
+    }
+    ```
+
+    - Fail:
+    ```javascript
+    {
+        "status": "timeout"
+    }
+    ```
+
+### 2.11 Export requests
+
 - Verb: **GET**
-- URI: api/mb/tcp/p/export
+- URI: /api/mb/tcp/polls/export
 
+- **[Request]** example
+
+    - URI:
+    ```bash
+    http://127.0.0.1/api/mb/tcp/polls/export
+
+    ```
+
+    - **Note:** No payload!!
+
+- **[Response]** example
+
+    - Success:
+    ```javascript
+    {
+        "status": "ok",
+        "polls": [
+             {
+                "fc": 1,
+                "ip": "192.168.3.2",
+                "port": "502",
+                "slave": 22,
+                "addr": 250,
+                "len": 10,
+                "interval" : 3,
+                "status": "ok",
+                "enabled": true
+            },
+            {
+                "fc": 1,
+                "ip": "192.168.3.2",
+                "port": "502",
+                "slave": 22,
+                "addr": 250,
+                "len": 10,
+                "interval" : 3,
+                "status": "ok",
+                "enabled": true
+            }]
+    }
+    ```
+
+    - Fail:
+    ```javascript
+    {
+        "status": "timeout"
+    }
+    ```
+
+---
 
 ## 3. Filter requests
 
 ### 3.1 Add filter
 - Verb: **POST**
+- URI: /api/mb/tcp/filter/**{name}**
 
 ### 3.2 Update filter
 - Verb: **PUT**
+- URI: /api/mb/tcp/filter/**{name}**
 
-### 3.3 Delete filter
+### 3.3 Read filter status
+- Verb: **GET**
+- URI: /api/mb/tcp/filter/**{name}**
+
+### 3.4 Delete filter
 - Verb: **DELETE**
+- URI: /api/mb/tcp/filter/**{name}**
 
-### 3.4 Enable/Disable filter
+### 3.5 Enable/Disable filter
 - Verb: **POST**
+- URI: /api/mb/tcp/filter/**{name}**/toggle
 
-### 3.5 Read all filters
+### 3.6 Read all filters
 - Verb: **GET**
+- URI: /api/mb/tcp/filters
 
-### 3.6 Delete all filters
+### 3.7 Delete all filters
+- Verb: **DELETE**
+- URI: /api/mb/tcp/filters
+
+### 3.8 Enable/Disable all filters
 - Verb: **POST**
+- URI: /api/mb/tcp/filters/toggle
 
-### 3.7 Enable/Disable all filters
+### 3.9 Import filters
 - Verb: **POST**
+- URI: /api/mb/tcp/filters/import
 
-### 3.8 Import
-- Verb: **POST**
-
-### 3.9 Export
+### 3.10 Export filters
 - Verb: **GET**
+- URI: /api/mb/tcp/filters/export
