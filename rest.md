@@ -474,6 +474,7 @@
 - **[Response]** example
 
     - Success:
+    
     ```javascript
     {
         "status": "ok",
@@ -504,6 +505,7 @@
     ```
 
     - Fail:
+    
     ```javascript
     {
         "status": "timeout"
