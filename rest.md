@@ -6,7 +6,7 @@
 ### 1.1 Read coil/register 
 
 - Verb: **GET**
-- URI: /mb/tcp/**{fc}**/read
+- URI: api/mb/tcp/**{fc}**/read
 - query string: ?ip=**{ip}**&port=**{port}**&slave=**{slave}**&addr=**{addr}**&len=**{len}**
 
 |param|desc|type|range|example|optional|
@@ -76,7 +76,7 @@
 ### 1.2 Write coil/register 
 
 - Verb: **POST**
-- URI: /mb/tcp/**{fc}**/write
+- URI: api/mb/tcp/**{fc}**/write
 
 |param|desc|type|range|example|optional|
 |:--|:--|:--|:--|:--|:--|
@@ -156,28 +156,58 @@
 ## 2. Polling requests
 
 ### 2.1 Add request
+- Verb: **POST**
+
 ### 2.2 Update request
+- Verb: **PUT**
+
 ### 2.3 Delete request
-### 2.4 Enable request
-### 2.5 Disable request
-### 2.6 Read all requests
-### 2.7 Delete all requests
-### 2.8 Enable all requests
-### 2.9 Disable all requests
-### 2.10 Import
-### 2.11 Export
+- Verb: **DELETE**
+
+### 2.4 Enable/Disable request
+- Verb: **POST**
+
+### 2.5 Read all requests
+- Verb: **GET**
+
+### 2.6 Delete all requests
+- Verb: **POST**
+
+### 2.7 Enable/Disable all requests
+- Verb: **POST**
+
+### 2.8 Import
+- Verb: **POST**
+
+### 2.9 Export
+- Verb: **GET**
 
 
 ## 3. Filter requests
 
 ### 3.1 Add filter
+- Verb: **POST**
+
 ### 3.2 Update filter
+- Verb: **PUT**
+
 ### 3.3 Delete filter
-### 3.4 Enable filter
-### 3.5 Disable filter
-### 3.6 Read all filters
-### 3.7 Delete all filters
-### 3.8 Enable all filters
-### 3.9 Disable all filters
-### 3.10 Import
-### 3.11 Export
+- Verb: **DELETE**
+
+### 3.4 Enable/Disable filter
+- Verb: **POST**
+
+### 3.5 Read all filters
+- Verb: **GET**
+
+### 3.6 Delete all filters
+- Verb: **POST**
+
+### 3.7 Enable/Disable all filters
+- Verb: **POST**
+
+### 3.8 Import
+- Verb: **POST**
+
+### 3.8 Export
+- Verb: **GET**
