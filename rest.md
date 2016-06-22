@@ -38,16 +38,16 @@
 
 ### 1.1 Read coil/register 
 
-|params |description            |In        |type          |range     |example     |required          |
-|:------|:----------------------|:---------|:-------------|:---------|:-----------|:-----------------|
-|fc     |function code          |path      |integer       |[1,4]     |1           |:heavy_check_mark:|
-|ip     |ip address             |query     |string        |-         |127.0.0.1   |:heavy_check_mark:|
-|port   |port number            |query     |string        |[1,65535] |502         | default: 502     |
-|slave  |slave id               |query     |integer       |[1, 253]  |1           |:heavy_check_mark:|
-|addr   |register start address |query     |integer       |-         |23          |:heavy_check_mark:|
-|len    |register length        |query     |integer       |-         |20          |default: 1        |
-|status |response status        |resp body |string        |-         |"ok"        |:heavy_check_mark:|
-|data   |response value         |resp body |integer array |          |[1,0,24,1]  |if success        |
+|params |description            |In            |type          |range     |example     |required          |
+|:------|:----------------------|:-------------|:-------------|:---------|:-----------|:-----------------|
+|fc     |function code          |path          |integer       |[1,4]     |1           |:heavy_check_mark:|
+|ip     |ip address             |query         |string        |-         |127.0.0.1   |:heavy_check_mark:|
+|port   |port number            |query         |string        |[1,65535] |502         | default: 502     |
+|slave  |slave id               |query         |integer       |[1, 253]  |1           |:heavy_check_mark:|
+|addr   |register start address |query         |integer       |-         |23          |:heavy_check_mark:|
+|len    |register length        |query         |integer       |-         |20          |default: 1        |
+|status |response status        |response body |string        |-         |"ok"        |:heavy_check_mark:|
+|data   |response value         |response body |integer array |          |[1,0,24,1]  |if success        |
 
 - Verb: **GET**
 - URI: /api/mb/tcp/fc/**{fc}**
@@ -106,16 +106,16 @@
 
 ### 1.2 Write coil/register
 
-|params |description            |In        |type          |range            |example     |required          |
-|:------|:----------------------|:---------|:-------------|:----------------|:-----------|:-----------------|
-|fc     |function code          |path      |integer       |**[5,6,15,16]**  |5           |:heavy_check_mark:|
-|ip     |ip address             |req body  |string        |-                |127.0.0.1   |:heavy_check_mark:|
-|port   |port number            |req body  |string        |[1,65535]        |502         | default: 502     |
-|slave  |slave id               |req body  |integer       |[1, 253]         |1           |:heavy_check_mark:|
-|addr   |register start address |req body  |integer       |-                |23          |:heavy_check_mark:|
-|len    |register length        |req body  |integer       |-                |20          | default: 1       |
-|data   |data to be write       |req body  |integer array |                 |[1,0,24,1]  |if success        |
-|status |response status        |resp body |string        |-                |"ok"        |:heavy_check_mark:|
+|params |description            |In            |type          |range              |example     |required          |
+|:------|:----------------------|:-------------|:-------------|:------------------|:-----------|:-----------------|
+|fc     |function code          |path          |integer       |**[5, 6, 15, 16]** |5           |:heavy_check_mark:|
+|ip     |ip address             |request body  |string        |-                  |127.0.0.1   |:heavy_check_mark:|
+|port   |port number            |request body  |string        |[1,65535]          |502         | default: 502     |
+|slave  |slave id               |request body  |integer       |[1, 253]           |1           |:heavy_check_mark:|
+|addr   |register start address |request body  |integer       |-                  |23          |:heavy_check_mark:|
+|len    |register length        |request body  |integer       |-                  |20          | default: 1       |
+|data   |data to be write       |request body  |integer array |                   |[1,0,24,1]  |if success        |
+|status |response status        |response body |string        |-                  |"ok"        |:heavy_check_mark:|
 
 
 - Verb: **POST**
@@ -193,10 +193,10 @@
 
 ### 1.3 Get TCP connection timeout
 
-|params |description            |In        |type          |range     |example     |required          |
-|:------|:----------------------|:---------|:-------------|:---------|:-----------|:-----------------|
-|status |response status        |resp body |string        |-         |"ok"        |:heavy_check_mark:|
-|timeout|timeout in usec        |resp body |integer       |[200000,~)|210000      |if success        |
+|params |description            |In            |type          |range     |example     |required          |
+|:------|:----------------------|:-------------|:-------------|:---------|:-----------|:-----------------|
+|status |response status        |response body |string        |-         |"ok"        |:heavy_check_mark:|
+|timeout|timeout in usec        |response body |integer       |[200000,~)|210000      |if success        |
 
 - Verb: **GET**
 - URI: /api/mb/tcp/timeout
@@ -228,10 +228,10 @@
 
 ### 1.4 Set TCP connection timeout
 
-|params |description            |In        |type          |range     |example     |required          |
-|:------|:----------------------|:---------|:-------------|:---------|:-----------|:-----------------|
-|timeout|timeout in usec        |req  body |integer       |[200000,~)|210000      |:heavy_check_mark:|
-|status |response status        |resp body |string        |-         |"ok"        |:heavy_check_mark:|
+|params |description            |In            |type          |range     |example     |required          |
+|:------|:----------------------|:-------------|:-------------|:---------|:-----------|:-----------------|
+|timeout|timeout in usec        |request  body |integer       |[200000,~)|210000      |:heavy_check_mark:|
+|status |response status        |response body |string        |-         |"ok"        |:heavy_check_mark:|
 
 - Verb: **POST**
 - URI: /api/mb/tcp/timeout
@@ -270,162 +270,184 @@
 
 ## 2. Polling requests
 
-|param       |desc               |type   |range     |example   |optional    |
-|:-----------|:------------------|:------|:---------|:---------|:-----------|
-|fc          |function code      |integer|[1,4]     |1         |-           |
-|ip          |IP address         |string |-         |127.0.0.1 |-           |  
-|port        |port number        |string |[1,65535] |502       |default: 502|
-|slave       |slave id           |integer|[1, 253]  |1         |-           |
-|addr        |register start addr|integer|-         |23        |-           |
-|len         |register length    |integer|-         |20        |default: 1  |
-|**name**    |request/sensor name|string |no space  |led_1     |_           |
-|**interval**|polling interval s |integer|[1~)      |3         |-           |
-
 ### 2.1 Add request
+
+|params       |description            |In            |type          |range                  |example     |required          |
+|:------------|:----------------------|:-------------|:-------------|:----------------------|:-----------|:-----------------|
+|**name**     |request/sensor name    |path          |string        |no space and **unique**|led_1       |:heavy_check_mark:|
+|fc           |function code          |request body  |integer       |**[1,4]**              |1           |:heavy_check_mark:|
+|ip           |ip address             |request body  |string        |-                      |127.0.0.1   |:heavy_check_mark:|
+|port         |port number            |request body  |string        |[1,65535]              |502         | default: 502     |
+|slave        |slave id               |request body  |integer       |[1, 253]               |1           |:heavy_check_mark:|
+|addr         |register start address |request body  |integer       |-                      |23          |:heavy_check_mark:|
+|len          |register length        |request body  |integer       |-                      |20          |default: 1        |
+|**interval** |polling interval in sec|request body  |integer       |[1~)                   |[1,0,24,1]  |:heavy_check_mark:|
+|status       |response status        |response body |string        |-                      |"ok"        |:heavy_check_mark:|
 
 - Verb: **POST**
 - URI: /api/mb/tcp/poll/**{name}**
+- Example:
 
-- **[Request]** example
+    - **Request**
 
-    - URI:
-    ```Bash
-    http://127.0.0.1/api/mb/tcp/poll/led_1
+        - endpoint:
+        ```Bash
+        http://127.0.0.1/api/mb/tcp/poll/led_1
+        ```
+        
+        - body:
+        ```JavaScript
+        {
+            "fc": 1,
+            "ip": "192.168.3.2",
+            "port": "502",
+            "slave": 22,
+            "addr": 250,
+            "len": 10,
+            "interval" : 3
+        }
+        ```
 
-    ```
-    
-    - Payload:
-    ```JavaScript
-    {
-        "fc": 1,
-        "ip": "192.168.3.2",
-        "port": "502",
-        "slave": 22,
-        "addr": 250,
-        "len": 10,
-        "interval" : 3
-    }
-    ```
+    - **Response**
 
-- **[Response]** example
+        - Success:
+        ```JavaScript
+        {
+            "status": "ok"
+        }
+        ```
 
-    - Success:
-    ```JavaScript
-    {
-        "status": "ok"
-    }
-    ```
-
-    - Fail:
-    ```JavaScript
-    {
-        "status": "timeout"
-    }
-    ```
+        - Fail:
+        ```JavaScript
+        {
+            "status": "timeout"
+        }
+        ```
 
 ### 2.2 Update request (interval)
 
+|params       |description            |In            |type          |range                  |example     |required          |
+|:------------|:----------------------|:-------------|:-------------|:----------------------|:-----------|:-----------------|
+|**name**     |request/sensor name    |path          |string        |no space and **unique**|led_1       |:heavy_check_mark:|
+|**interval** |polling interval in sec|request body  |integer       |[1~)                   |[1,0,24,1]  |:heavy_check_mark:|
+|status       |response status        |response body |string        |-                      |"ok"        |:heavy_check_mark:|
+
 - Verb: **PUT**
 - URI: /api/mb/tcp/poll/**{name}**
+- Example:
 
-- **[Request]** example
+    - **Request**
+        - endpoint:
+        ```Bash
+        http://127.0.0.1/api/mb/tcp/poll/led_1
 
-    - URI:
-    ```Bash
-    http://127.0.0.1/api/mb/tcp/poll/led_1
+        ```
+        
+        - Body:
+        ```JavaScript
+        {
+            "interval" : 3
+        }
+        ```
 
-    ```
-    
-    - Payload:
-    ```JavaScript
-    {
-        "interval" : 3
-    }
-    ```
+    - **Response**
 
-- **[Response]** example
+        - Success:
+        ```JavaScript
+        {
+            "status": "ok"
+        }
+        ```
 
-    - Success:
-    ```JavaScript
-    {
-        "status": "ok"
-    }
-    ```
-
-    - Fail:
-    ```JavaScript
-    {
-        "status": "timeout"
-    }
-    ```
+        - Fail:
+        ```JavaScript
+        {
+            "status": "timeout"
+        }
+        ```
 
 ### 2.3 Read request status
 
+|params       |description            |In            |type          |range                  |example     |required          |
+|:------------|:----------------------|:-------------|:-------------|:----------------------|:-----------|:-----------------|
+|**name**     |request/sensor name    |path          |string        |no space and **unique**|led_1       |:heavy_check_mark:|
+|fc           |function code          |response body |integer       |**[1,4]**              |1           |if success        |
+|ip           |ip address             |response body |string        |-                      |127.0.0.1   |if success        |
+|port         |port number            |response body |string        |[1,65535]              |502         |if success        |
+|slave        |slave id               |response body |integer       |[1, 253]               |1           |if success        |
+|addr         |register start address |response body |integer       |-                      |23          |if success        |
+|len          |register length        |response body |integer       |-                      |20          |if success        |
+|**interval** |polling interval in sec|response body |integer       |[1~)                   |[1,0,24,1]  |if success        |
+|**enabled**  |polling enabled flag   |response body |boolean       |true, false            |true        |if success        |
+|status       |response status        |response body |string        |-                      |"ok"        |:heavy_check_mark:|
+
 - Verb: **GET**
 - URI: /api/mb/tcp/poll/**{name}**
+- Example:
 
-- **[Request]** example
+    - **Request**
+        - endpoint:
+        ```Bash
+        http://127.0.0.1/api/mb/tcp/poll/led_1
+        ```
 
-    - URI:
-    ```Bash
-    http://127.0.0.1/api/mb/tcp/poll/led_1
+    - **Response**
 
-    ```
+        - Success:
+        ```JavaScript
+        {
+            "fc": 1,
+            "ip": "192.168.3.2",
+            "port": "502",
+            "slave": 22,
+            "addr": 250,
+            "len": 10,
+            "interval" : 3,
+            "status": "ok",
+            "enabled": true
+        }
+        ```
 
-- **[Response]** example
-
-    - Success:
-        - **Note:** enabled field
-    
-    ```JavaScript
-    {
-        "fc": 1,
-        "ip": "192.168.3.2",
-        "port": "502",
-        "slave": 22,
-        "addr": 250,
-        "len": 10,
-        "interval" : 3,
-        "status": "ok",
-        "enabled": true
-    }
-    ```
-
-    - Fail:
-    ```JavaScript
-    {
-        "status": "not exist"
-    }
-    ```
+        - Fail:
+        ```JavaScript
+        {
+            "status": "not exist"
+        }
+        ```
 
 ### 2.4 Delete request
 
+|params       |description            |In            |type          |range                  |example     |required          |
+|:------------|:----------------------|:-------------|:-------------|:----------------------|:-----------|:-----------------|
+|**name**     |request/sensor name    |path          |string        |no space and **unique**|led_1       |:heavy_check_mark:|
+|status       |response status        |response body |string        |-                      |"ok"        |:heavy_check_mark:|
+
 - Verb: **DELETE**
 - URI: /api/mb/tcp/poll/**{name}**
+- Example:
 
-- **[Request]** example
+    - **Request**
+        - endpoint:
+        ```Bash
+        http://127.0.0.1/api/mb/tcp/poll/led_1
+        ```
+        - Body: **No payload**
 
-    - URI:
-    ```Bash
-    http://127.0.0.1/api/mb/tcp/poll/led_1
-    ```
-    - **Note:** No payload!!
+    - **Response**
 
-- **[Response]** example
+        - Success:
+        ```JavaScript
+        {
+            "status": "ok"
+        }
+        ```
 
-    - Success:
-    ```JavaScript
-    {
-        "status": "ok"
-    }
-    ```
-
-    - Fail:
-    ```JavaScript
-    {
-        "status": "timeout"
-    }
-    ```
+        - Fail:
+        ```JavaScript
+        {
+            "status": "timeout"
+        }
+        ```
 
 ### 2.5 Read history
 
