@@ -154,9 +154,11 @@
             "status": "timeout"
         }
         ```
+
 - Example: write **multiple** coils/registers
 
     - **Request**
+    
         - endpoint:
         ```Bash
         http://127.0.0.1/api/mb/tcp/fc/5
@@ -174,6 +176,7 @@
         ```
 
     - **Response**
+    
         - Success:
         ```JavaScript
         {
@@ -190,71 +193,79 @@
 
 ### 1.3 Get TCP connection timeout
 
+|params |description            |In        |type          |range     |example     |required          |
+|:------|:----------------------|:---------|:-------------|:---------|:-----------|:-----------------|
+|status |response status        |resp body |string        |-         |"ok"        |:heavy_check_mark:|
+|timeout|timeout in usec        |resp body |integer       |[200000,~)|210000      |if success        |
+
 - Verb: **GET**
 - URI: /api/mb/tcp/timeout
+- Example:
 
-|param   |desc           |type         |range      |example   |
-|:-------|:--------------|:------------|:----------|:---------|
-|timeout |timeout in usec|integer      |[200000~)  |210000    |
+    - **Request**
 
-- **[Request]** example
+        - endpoint:
+        ```Bash
+        http://127.0.0.1/api/mb/tcp/timeout
+        ```
 
-    ```Bash
-    http://127.0.0.1/api/mb/tcp/timeout
-    ```
+    - **Response**
 
-- **[Response]** example
+        - Success:
+        ```JavaScript
+        {
+            "status": "ok",
+            "timeout": 210000
+        }
+        ```
 
-    - Success:
-    ```JavaScript
-    {
-        "status": "ok",
-        "timeout": 210000
-    }
-    ```
-
-    - Fail:
-    ```JavaScript
-    {
-        "status": "timeout"
-    }
-    ```
+        - Fail:
+        ```JavaScript
+        {
+            "status": "timeout"
+        }
+        ```
 
 ### 1.4 Set TCP connection timeout
 
+|params |description            |In        |type          |range     |example     |required          |
+|:------|:----------------------|:---------|:-------------|:---------|:-----------|:-----------------|
+|timeout|timeout in usec        |req  body |integer       |[200000,~)|210000      |:heavy_check_mark:|
+|status |response status        |resp body |string        |-         |"ok"        |:heavy_check_mark:|
+
 - Verb: **POST**
 - URI: /api/mb/tcp/timeout
+- Example:
 
-- **[Request]** example
+    - **Request**
 
-    - URI:
-    ```Bash
-    http://127.0.0.1/api/mb/tcp/timeout
-    ```
-    
-    - Payload:
-    ```JavaScript
-    {
-        "timeout": 210000
-    }
-    ```
+        - endpoint:
+        ```Bash
+        http://127.0.0.1/api/mb/tcp/timeout
+        ```
+        
+        - body:
+        ```JavaScript
+        {
+            "timeout": 210000
+        }
+        ```
 
-- **[Response]** example
+    - **Response**
 
-    - Success:
-    ```JavaScript
-    {
-        "status": "ok"
-    }
-    ```
+        - Success:
+        ```JavaScript
+        {
+            "status": "ok"
+        }
+        ```
 
-    - Fail:
-    ```JavaScript
-    {
-        "status": "timeout"
-    }
-    ```
-
+        - Fail:
+        ```JavaScript
+        {
+            "status": "timeout"
+        }
+        ```
 ---
 
 ## 2. Polling requests
