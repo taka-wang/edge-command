@@ -63,7 +63,7 @@
         - len: 1
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/fc/1?ip=192.168.3.2&slave=1&addr=10
+        /api/mb/tcp/fc/1?ip=192.168.3.2&slave=1&addr=10
         ```
 
     - **Response**
@@ -86,7 +86,7 @@
     - **Request**
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/fc/2?ip=192.168.3.2&port=503&slave=1&addr=10&len=10
+        /api/mb/tcp/fc/2?ip=192.168.3.2&port=503&slave=1&addr=10&len=10
         ```
 
     - **Response**
@@ -128,7 +128,7 @@
         - port: 502
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/fc/5
+        /api/mb/tcp/fc/5
         ```
         - body:
         ```JavaScript
@@ -161,7 +161,7 @@
     - **Request**
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/fc/5
+        /api/mb/tcp/fc/5
         ```
         - body:
         ```JavaScript
@@ -204,7 +204,7 @@
     - **Request**
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/timeout
+        /api/mb/tcp/timeout
         ```
 
     - **Response**
@@ -237,7 +237,7 @@
     - **Request**
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/timeout
+        /api/mb/tcp/timeout
         ```
         
         - body:
@@ -286,7 +286,7 @@
     - **Request**
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/poll/led_1
+        /api/mb/tcp/poll/led_1
         ```
         
         - body:
@@ -332,7 +332,7 @@
     - **Request**
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/poll/led_1
+        /api/mb/tcp/poll/led_1
 
         ```
         
@@ -380,7 +380,7 @@
     - **Request**
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/poll/led_1
+        /api/mb/tcp/poll/led_1
         ```
 
     - **Response**
@@ -420,7 +420,7 @@
     - **Request**
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/poll/led_1
+        /api/mb/tcp/poll/led_1
         ```
         - body: **No payload**
 
@@ -456,7 +456,7 @@
     - **Request**
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/poll/led_1/logs
+        /api/mb/tcp/poll/led_1/logs
         ```
 
     - **Response**
@@ -503,7 +503,7 @@
     - **Request**
         - endpoint:
         ```bash
-        http://127.0.0.1/api/mb/tcp/poll/led_1/toggle
+        /api/mb/tcp/poll/led_1/toggle
         ```
         - body:
         ```JavaScript
@@ -550,7 +550,7 @@
     - **Request**
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/polls
+        /api/mb/tcp/polls
         ```
 
     - **Response**
@@ -605,7 +605,7 @@
     - **Request**
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/polls
+        /api/mb/tcp/polls
         ```
 
     - **Response**
@@ -638,7 +638,7 @@
     - **Request**
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/polls/toggle
+        /api/mb/tcp/polls/toggle
         ```
         - body:
         ```JavaScript
@@ -687,7 +687,7 @@
     - **Request**
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/polls/import
+        /api/mb/tcp/polls/import
         ```
         - body:
         ```JavaScript
@@ -762,7 +762,7 @@
     - **Request**
         - endpoint:
         ```Bash
-        http://127.0.0.1/api/mb/tcp/polls/export
+        /api/mb/tcp/polls/export
         ```
     - **Response**
         - success:
