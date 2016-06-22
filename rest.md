@@ -63,8 +63,7 @@
         ```
 
     - **Response**
-
-        - Success:
+        - success:
         ```JavaScript
         {
             "status": "ok",
@@ -72,7 +71,7 @@
         }
         ```
 
-        - Fail:
+        - fail:
         ```JavaScript
         {
             "status": "timeout"
@@ -87,8 +86,7 @@
         ```
 
     - **Response**
-
-        - Success:
+        - success:
         ```JavaScript
         {
             "status": "ok",
@@ -96,7 +94,7 @@
         }
         ```
 
-        - Fail:
+        - fail:
         ```JavaScript
         {
             "status": "timeout"
@@ -123,7 +121,6 @@
 - Example: write **single** coil/register
 
     - **Request**
-
         - port: 502
         - endpoint:
         ```Bash
@@ -141,14 +138,14 @@
 
     - **Response**
 
-        - Success:
+        - success:
         ```JavaScript
         {
             "status": "ok",
         }
         ```
 
-        - Fail:
+        - fail:
         ```JavaScript
         {
             "status": "timeout"
@@ -158,7 +155,6 @@
 - Example: write **multiple** coils/registers
 
     - **Request**
-    
         - endpoint:
         ```Bash
         http://127.0.0.1/api/mb/tcp/fc/5
@@ -176,15 +172,14 @@
         ```
 
     - **Response**
-    
-        - Success:
+        - success:
         ```JavaScript
         {
             "status": "ok",
         }
         ```
 
-        - Fail:
+        - fail:
         ```JavaScript
         {
             "status": "timeout"
@@ -203,15 +198,13 @@
 - Example:
 
     - **Request**
-
         - endpoint:
         ```Bash
         http://127.0.0.1/api/mb/tcp/timeout
         ```
 
     - **Response**
-
-        - Success:
+        - success:
         ```JavaScript
         {
             "status": "ok",
@@ -219,7 +212,7 @@
         }
         ```
 
-        - Fail:
+        - fail:
         ```JavaScript
         {
             "status": "timeout"
@@ -238,7 +231,6 @@
 - Example:
 
     - **Request**
-
         - endpoint:
         ```Bash
         http://127.0.0.1/api/mb/tcp/timeout
@@ -252,15 +244,14 @@
         ```
 
     - **Response**
-
-        - Success:
+        - success:
         ```JavaScript
         {
             "status": "ok"
         }
         ```
 
-        - Fail:
+        - fail:
         ```JavaScript
         {
             "status": "timeout"
@@ -289,7 +280,6 @@
 - Example:
 
     - **Request**
-
         - endpoint:
         ```Bash
         http://127.0.0.1/api/mb/tcp/poll/led_1
@@ -309,15 +299,14 @@
         ```
 
     - **Response**
-
-        - Success:
+        - success:
         ```JavaScript
         {
             "status": "ok"
         }
         ```
 
-        - Fail:
+        - fail:
         ```JavaScript
         {
             "status": "timeout"
@@ -343,7 +332,7 @@
 
         ```
         
-        - Body:
+        - body:
         ```JavaScript
         {
             "interval" : 3
@@ -351,15 +340,14 @@
         ```
 
     - **Response**
-
-        - Success:
+        - success:
         ```JavaScript
         {
             "status": "ok"
         }
         ```
 
-        - Fail:
+        - fail:
         ```JavaScript
         {
             "status": "timeout"
@@ -392,8 +380,7 @@
         ```
 
     - **Response**
-
-        - Success:
+        - success:
         ```JavaScript
         {
             "fc": 1,
@@ -408,7 +395,7 @@
         }
         ```
 
-        - Fail:
+        - fail:
         ```JavaScript
         {
             "status": "not exist"
@@ -431,18 +418,17 @@
         ```Bash
         http://127.0.0.1/api/mb/tcp/poll/led_1
         ```
-        - Body: **No payload**
+        - body: **No payload**
 
     - **Response**
-
-        - Success:
+        - success:
         ```JavaScript
         {
             "status": "ok"
         }
         ```
 
-        - Fail:
+        - fail:
         ```JavaScript
         {
             "status": "timeout"
@@ -451,307 +437,362 @@
 
 ### 2.5 Read history
 
+|params   |description            |In            |type          |range                  |example     |required          |
+|:--------|:----------------------|:-------------|:-------------|:----------------------|:-----------|:-----------------|
+|**name** |request/sensor name    |path          |string        |no space and **unique**|led_1       |:heavy_check_mark:|
+|status   |response status        |response body |string        |-                      |"ok"        |:heavy_check_mark:|
+|data(1)  |outer data             |response body |object array  |-                      |-           |if success        |
+|data(2)  |inner data             |response body |integer array |                       |[1,0,24,1]  |if success        |
+|ts       |time stamp             |response body |integer       |-                      |-           |if success        |
+
 - Verb: **GET**
 - URI: /api/mb/tcp/poll/**{name}**/logs
+- Example:
 
-- **[Request]** example
+    - **Request**
+        - endpoint:
+        ```Bash
+        http://127.0.0.1/api/mb/tcp/poll/led_1/logs
+        ```
 
-    - URI:
-    ```Bash
-    http://127.0.0.1/api/mb/tcp/poll/led_1/logs
-    ```
-    - **Note:** No payload!!
+    - **Response**
+        - success (len=1):
+        ```JavaScript
+        {
+            "status": "ok",
+            "data":[{"data": [1], "ts": 2012031203},
+                    {"data": [0], "ts": 2012031205},
+                    {"data": [1], "ts": 2012031207}]        
+        }
+        ```
+        
+        - success (len=n):
+        ```JavaScript
+        {
+            "status": "ok",
+            "data":[{"data": [1,0,1], "ts": 2012031203},
+                    {"data": [1,1,1], "ts": 2012031205},
+                    {"data": [0,0,1], "ts": 2012031207}]        
+        }
+        ```
 
-- **[Response]** example
-
-    - Success (len=1):
-    ```JavaScript
-    {
-        "status": "ok",
-        "data":[{"data": [1], "ts": 2012031203},
-                {"data": [0], "ts": 2012031205},
-                {"data": [1], "ts": 2012031207}]        
-    }
-    ```
-    
-    - Success (len=n):
-    ```JavaScript
-    {
-        "status": "ok",
-        "data":[{"data": [1,0,1], "ts": 2012031203},
-                {"data": [1,1,1], "ts": 2012031205},
-                {"data": [0,0,1], "ts": 2012031207}]        
-    }
-    ```
-
-    - Fail:
-    ```JavaScript
-    {
-        "status": "not exist"
-    }
-    ```
+        - fail:
+        ```JavaScript
+        {
+            "status": "not exist"
+        }
+        ```
 
 ### 2.6 Enable/Disable request
 
+|params       |description            |In            |type          |range                  |example     |required          |
+|:------------|:----------------------|:-------------|:-------------|:----------------------|:-----------|:-----------------|
+|**name**     |request/sensor name    |path          |string        |no space and **unique**|led_1       |:heavy_check_mark:|
+|**enabled**  |polling enabled flag   |request  body |boolean       |true, false            |true        |:heavy_check_mark:|
+|status       |response status        |response body |string        |-                      |"ok"        |:heavy_check_mark:|
+
+
 - Verb: **POST**
 - URI: /api/mb/tcp/poll/**{name}**/toggle
+- Example:
 
-- **[Request]** example
+    - **Request**
+        - endpoint:
+        ```bash
+        http://127.0.0.1/api/mb/tcp/poll/led_1/toggle
+        ```
+        - body:
+        ```JavaScript
+        {
+            "enabled": true
+        }
+        ```
 
-    - URI:
-    ```bash
-    http://127.0.0.1/api/mb/tcp/poll/led_1/toggle
-    ```
-    - Payload:
-    ```JavaScript
-    {
-        "enable": true
-    }
-    ```
+    - **Response**
+        - success:
+        ```JavaScript
+        {
+            "status": "ok"
+        }
+        ```
 
-- **[Response]** example
-
-    - Success:
-    ```JavaScript
-    {
-        "status": "ok"
-    }
-    ```
-
-    - Fail:
-    ```JavaScript
-    {
-        "status": "timeout"
-    }
-    ```
+        - fail:
+        ```JavaScript
+        {
+            "status": "timeout"
+        }
+        ```
  
 ### 2.7 Read all requests
 
+|params       |description            |In            |type          |range                  |example     |required          |
+|:------------|:----------------------|:-------------|:-------------|:----------------------|:-----------|:-----------------|
+|polls        |request object array   |response body |object array  |-                      |-           |if success        |
+|**name**     |request/sensor name    |response body |string        |no space and **unique**|led_1       |if success        |
+|fc           |function code          |response body |integer       |**[1,4]**              |1           |if success        |
+|ip           |ip address             |response body |string        |-                      |127.0.0.1   |if success        |
+|port         |port number            |response body |string        |[1,65535]              |502         |if success        |
+|slave        |slave id               |response body |integer       |[1, 253]               |1           |if success        |
+|addr         |register start address |response body |integer       |-                      |23          |if success        |
+|len          |register length        |response body |integer       |-                      |20          |if success        |
+|**interval** |polling interval in sec|response body |integer       |[1~)                   |[1,0,24,1]  |if success        |
+|**enabled**  |polling enabled flag   |response body |boolean       |true, false            |true        |if success        |
+|status       |response status        |response body |string        |-                      |"ok"        |:heavy_check_mark:|
+
 - Verb: **GET**
 - URI: /api/mb/tcp/polls
+- Example:
 
-- **[Request]** example
+    - **Request**
+        - endpoint:
+        ```Bash
+        http://127.0.0.1/api/mb/tcp/polls
+        ```
 
-    - URI:
-    ```Bash
-    http://127.0.0.1/api/mb/tcp/polls
-    ```
-
-- **[Response]** example
-
-    - Success:
-    
-    ```JavaScript
-    {
-        "status": "ok",
-        "polls": [
-             {
-                "fc": 1,
-                "ip": "192.168.3.2",
-                "port": "502",
-                "slave": 22,
-                "addr": 250,
-                "len": 10,
-                "interval" : 3,
-                "status": "ok",
-                "enabled": true
-            },
+    - **Response**
+        - success:
+            ```JavaScript
             {
-                "fc": 1,
-                "ip": "192.168.3.2",
-                "port": "502",
-                "slave": 22,
-                "addr": 250,
-                "len": 10,
-                "interval" : 3,
                 "status": "ok",
-                "enabled": true
-            }]
-    }
-    ```
+                "polls": [
+                    {
+                        "name": "led_1",
+                        "fc": 1,
+                        "ip": "192.168.3.2",
+                        "port": "502",
+                        "slave": 22,
+                        "addr": 250,
+                        "len": 10,
+                        "interval" : 3,
+                        "status": "ok",
+                        "enabled": true
+                    },
+                    {
+                        "name": "led_2",
+                        "fc": 1,
+                        "ip": "192.168.3.2",
+                        "port": "502",
+                        "slave": 22,
+                        "addr": 250,
+                        "len": 10,
+                        "interval" : 3,
+                        "status": "ok",
+                        "enabled": true
+                    }]
+            }
+            ```
 
-    - Fail:
-    
-    ```JavaScript
-    {
-        "status": "timeout"
-    }
-    ```
-
+        - fail:
+            ```JavaScript
+            {
+                "status": "timeout"
+            }
+            ```
 
 ### 2.8 Delete all requests
 
+|params       |description            |In            |type          |range      |example     |required          |
+|:------------|:----------------------|:-------------|:-------------|:----------|:-----------|:-----------------|
+|status       |response status        |response body |string        |-          |"ok"        |:heavy_check_mark:|
+
 - Verb: **DELETE**
 - URI: /api/mb/tcp/polls
+- Example:
+    - **Request**
+        - endpoint:
+        ```Bash
+        http://127.0.0.1/api/mb/tcp/polls
+        ```
 
-- **[Request]** example
+    - **Response**
+        - success:
+        ```JavaScript
+        {
+            "status": "ok"
+        }
+        ```
 
-    - URI:
-    ```Bash
-    http://127.0.0.1/api/mb/tcp/polls
-    ```
-
-- **[Response]** example
-
-    - Success:
-    ```JavaScript
-    {
-        "status": "ok"
-    }
-    ```
-
-    - Fail:
-    ```JavaScript
-    {
-        "status": "timeout"
-    }
-    ```
+        - fail:
+        ```JavaScript
+        {
+            "status": "timeout"
+        }
+        ```
 
 ### 2.9 Enable/Disable all requests
 
+|params       |description            |In            |type          |range      |example     |required          |
+|:------------|:----------------------|:-------------|:-------------|:----------|:-----------|:-----------------|
+|**enabled**  |polling enabled flag   |request  body |boolean       |true, false|true        |:heavy_check_mark:|
+|status       |response status        |response body |string        |-          |"ok"        |:heavy_check_mark:|
+
+
 - Verb: **POST**
 - URI: /api/mb/tcp/polls/toggle
+- Example:
 
-- **[Request]** example
+    - **Request**
+        - endpoint:
+        ```Bash
+        http://127.0.0.1/api/mb/tcp/polls/toggle
+        ```
+        - body:
+        ```JavaScript
+        {
+            "enabled": true
+        }
+        ```
+    - **Response**
+        - success:
+        ```JavaScript
+        {
+            "status": "ok"
+        }
+        ```
 
-    - URI:
-    ```Bash
-    http://127.0.0.1/api/mb/tcp/polls/toggle
-    ```
-    - Payload:
-    ```JavaScript
-    {
-        "enable": true
-    }
-    ```
-
-- **[Response]** example
-
-    - Success:
-    ```JavaScript
-    {
-        "status": "ok"
-    }
-    ```
-
-    - Fail:
-    ```JavaScript
-    {
-        "status": "timeout"
-    }
-    ```
+        - fail:
+        ```JavaScript
+        {
+            "status": "timeout"
+        }
+        ```
 
 ### 2.10 Import requests
 
+|params       |description            |In            |type          |range                  |example     |required          |
+|:------------|:----------------------|:-------------|:-------------|:----------------------|:-----------|:-----------------|
+|polls        |request object array   |request body  |object array  |-                      |-           |:heavy_check_mark:|
+|**name**     |request/sensor name    |request body  |string        |no space and **unique**|led_1       |:heavy_check_mark:|
+|fc           |function code          |request body  |integer       |**[1,4]**              |1           |:heavy_check_mark:|
+|ip           |ip address             |request body  |string        |-                      |127.0.0.1   |:heavy_check_mark:|
+|port         |port number            |request body  |string        |[1,65535]              |502         |:heavy_check_mark:|
+|slave        |slave id               |request body  |integer       |[1, 253]               |1           |:heavy_check_mark:|
+|addr         |register start address |request body  |integer       |-                      |23          |:heavy_check_mark:|
+|len          |register length        |request body  |integer       |-                      |20          |:heavy_check_mark:|
+|**interval** |polling interval in sec|request body  |integer       |[1~)                   |[1,0,24,1]  |:heavy_check_mark:|
+|**enabled**  |polling enabled flag   |request body  |boolean       |true, false            |true        |:heavy_check_mark:|
+|status       |response status        |response body |string        |-                      |"ok"        |:heavy_check_mark:|
+
 - Verb: **POST**
 - URI: /api/mb/tcp/polls/import
+- Example:
 
-- **[Request]** example
+    - **Request**
+        - endpoint:
+        ```Bash
+        http://127.0.0.1/api/mb/tcp/polls/import
+        ```
+        - body:
+        ```JavaScript
+        {
+            "polls": [
+                {
+                    "name": "led_1",
+                    "fc": 1,
+                    "ip": "192.168.3.2",
+                    "port": "502",
+                    "slave": 22,
+                    "addr": 250,
+                    "len": 10,
+                    "interval" : 3,
+                    "status": "ok",
+                    "enabled": true
+                },
+                {
+                    "name": "led_2",
+                    "fc": 1,
+                    "ip": "192.168.3.2",
+                    "port": "502",
+                    "slave": 22,
+                    "addr": 250,
+                    "len": 10,
+                    "interval" : 3,
+                    "status": "ok",
+                    "enabled": true
+                }]
+        }
+        ```
 
-    - URI:
-    ```Bash
-    http://127.0.0.1/api/mb/tcp/polls/import
+    - **Response**
+        - success:
+        ```JavaScript
+        {
+            "status": "ok"
+        }
+        ```
 
-    ```
+        - fail:
+        ```JavaScript
+        {
+            "status": "timeout"
+        }
+        ```
 
-    - Payload:
-    ```JavaScript
-    {
-        "polls": [
-             {
-                "fc": 1,
-                "ip": "192.168.3.2",
-                "port": "502",
-                "slave": 22,
-                "addr": 250,
-                "len": 10,
-                "interval" : 3,
-                "status": "ok",
-                "enabled": true
-            },
-            {
-                "fc": 1,
-                "ip": "192.168.3.2",
-                "port": "502",
-                "slave": 22,
-                "addr": 250,
-                "len": 10,
-                "interval" : 3,
-                "status": "ok",
-                "enabled": true
-            }]
-    }
-    ```
-
-- **[Response]** example
-
-    - Success:
-    ```JavaScript
-    {
-        "status": "ok"
-    }
-    ```
-
-    - Fail:
-    ```JavaScript
-    {
-        "status": "timeout"
-    }
-    ```
 
 ### 2.11 Export requests
 
+|params       |description            |In             |type          |range                  |example     |required          |
+|:------------|:----------------------|:--------------|:-------------|:----------------------|:-----------|:-----------------|
+|polls        |request object array   |response body  |object array  |-                      |-           |if success        |
+|**name**     |request/sensor name    |response body  |string        |no space and **unique**|led_1       |if success        |
+|fc           |function code          |response body  |integer       |**[1,4]**              |1           |if success        |
+|ip           |ip address             |response body  |string        |-                      |127.0.0.1   |if success        |
+|port         |port number            |response body  |string        |[1,65535]              |502         |if success        |
+|slave        |slave id               |response body  |integer       |[1, 253]               |1           |if success        |
+|addr         |register start address |response body  |integer       |-                      |23          |if success        |
+|len          |register length        |response body  |integer       |-                      |20          |if success        |
+|**interval** |polling interval in sec|response body  |integer       |[1~)                   |[1,0,24,1]  |if success        |
+|**enabled**  |polling enabled flag   |response body  |boolean       |true, false            |true        |if success        |
+|status       |response status        |response body  |string        |-                      |"ok"        |:heavy_check_mark:|
+
 - Verb: **GET**
 - URI: /api/mb/tcp/polls/export
+- Example:
 
-- **[Request]** example
+    - **Request**
+        - endpoint:
+        ```Bash
+        http://127.0.0.1/api/mb/tcp/polls/export
+        ```
+    - **Response**
+        - success:
+        ```JavaScript
+        {
+            "status": "ok",
+            "polls": [
+                {
+                    "name": "led_1",
+                    "fc": 1,
+                    "ip": "192.168.3.2",
+                    "port": "502",
+                    "slave": 22,
+                    "addr": 250,
+                    "len": 10,
+                    "interval" : 3,
+                    "status": "ok",
+                    "enabled": true
+                },
+                {
+                    "name": "led_2",
+                    "fc": 1,
+                    "ip": "192.168.3.2",
+                    "port": "502",
+                    "slave": 22,
+                    "addr": 250,
+                    "len": 10,
+                    "interval" : 3,
+                    "status": "ok",
+                    "enabled": true
+                }]
+        }
+        ```
 
-    - URI:
-    ```Bash
-    http://127.0.0.1/api/mb/tcp/polls/export
-
-    ```
-
-    - **Note:** No payload!!
-
-- **[Response]** example
-
-    - Success:
-    ```JavaScript
-    {
-        "status": "ok",
-        "polls": [
-             {
-                "fc": 1,
-                "ip": "192.168.3.2",
-                "port": "502",
-                "slave": 22,
-                "addr": 250,
-                "len": 10,
-                "interval" : 3,
-                "status": "ok",
-                "enabled": true
-            },
-            {
-                "fc": 1,
-                "ip": "192.168.3.2",
-                "port": "502",
-                "slave": 22,
-                "addr": 250,
-                "len": 10,
-                "interval" : 3,
-                "status": "ok",
-                "enabled": true
-            }]
-    }
-    ```
-
-    - Fail:
-    ```JavaScript
-    {
-        "status": "timeout"
-    }
-    ```
+        - fail:
+        ```JavaScript
+        {
+            "status": "timeout"
+        }
+        ```
 
 ---
 
