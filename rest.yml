@@ -1,0 +1,123 @@
+swagger: '2.0'
+info:
+  title: REST API
+  description: Proactive service API for modbus TCP
+  version: 0.0.1
+host: 127.0.0.1
+
+schemes:
+  - https
+  - http
+basePath: /api
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /mb/tcp/poll/{name}:
+    get:
+      description: Read request status by request name
+      parameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Request name
+      responses:
+        default:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Response'
+          examples:
+            'application/json':
+              status: "not exist"
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ModbusTCP'
+          examples:
+            'application/json':
+              fc: 1
+              ip: "192.168.3.2"
+              port: "502"
+              slave: 22
+              addr: 250
+              len: 10
+              interval: 3
+              enabled: true
+              status: "ok"
+    post:
+      description: Add request
+      produces:
+        - application/json
+      parameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Request name
+        - $ref: "#/parameters/ModbusTCP"
+      responses:
+        default:
+          description: Bad request
+
+parameters:
+  ModbusTCP:
+    name: name
+    in: query
+    type: string
+    required: true
+    description: Request name
+
+
+definitions:
+  ModbusTCP:
+    type: object
+    required:
+      - fc
+      - ip
+      - port
+      - slave
+      - addr
+    properties:
+      fc:
+        description: modbus function code
+        type: integer
+        format: int32
+      ip:
+        description: IP address
+        type: string
+      port:
+        description: Port number in string
+        type: string
+        default: "502"
+      slave:
+        description: Slave ID
+        type: integer
+        format: int8
+      addr:
+        description: Register/Coil start address
+        type: integer
+        format: int32
+      len:
+        description: Register/Coil length
+        type: integer
+        format: int32
+      interval:
+        description: Polling interval in usec
+        type: integer
+        format: uint64
+        default: 200000
+      enabled:
+        description: Poller status
+        type: boolean
+        default: true
+  Response:
+    type: object
+    required:
+      - status
+    properties:
+      status:
+        type: string
+        default: Bad request
