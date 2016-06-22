@@ -3,10 +3,10 @@
 
 ## Table of Content
 
-1. [REST API](rest.md)
-2. [Websocket](websocket.md)
-3. [MQTT](mqtt.md)
-4. [ZMQ](zmq.md)
+1. [ZMQ](zmq.md)
+2. [REST API](rest.md)
+3. [Websocket](websocket.md)
+4. [MQTT](mqtt.md)
 5. [DDS](dds.md)
 
 ---

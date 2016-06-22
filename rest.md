@@ -1,39 +1,40 @@
 # REST API 
 
-<!-- TOC depthFrom:1 depthTo:6 insertAnchor:false orderedList:false updateOnSave:true withLinks:true -->
+# Table of contents
 
-- [REST API](#rest-api)
-	- [1. One-off requests](#1-one-off-requests)
-		- [1.1 Read coil/register](#11-read-coilregister)
-		- [1.2 Write coil/register](#12-write-coilregister)
-		- [1.3 Get TCP connection timeout](#13-get-tcp-connection-timeout)
-		- [1.4 Set TCP connection timeout](#14-set-tcp-connection-timeout)
-	- [2. Polling requests](#2-polling-requests)
-		- [2.1 Add request](#21-add-request)
-		- [2.2 Update request (interval)](#22-update-request-interval)
-		- [2.3 Read request status](#23-read-request-status)
-		- [2.4 Delete request](#24-delete-request)
-		- [2.5 Read history](#25-read-history)
-		- [2.6 Enable/Disable request](#26-enabledisable-request)
-		- [2.7 Read all requests](#27-read-all-requests)
-		- [2.8 Delete all requests](#28-delete-all-requests)
-		- [2.9 Enable/Disable all requests](#29-enabledisable-all-requests)
-		- [2.10 Import requests](#210-import-requests)
-		- [2.11 Export requests](#211-export-requests)
-	- [3. Filter requests](#3-filter-requests)
-		- [3.1 Add filter](#31-add-filter)
-		- [3.2 Update filter](#32-update-filter)
-		- [3.3 Read filter status](#33-read-filter-status)
-		- [3.4 Delete filter](#34-delete-filter)
-		- [3.5 Enable/Disable filter](#35-enabledisable-filter)
-		- [3.6 Read all filters](#36-read-all-filters)
-		- [3.7 Delete all filters](#37-delete-all-filters)
-		- [3.8 Enable/Disable all filters](#38-enabledisable-all-filters)
-		- [3.9 Import filters](#39-import-filters)
-		- [3.10 Export filters](#310-export-filters)
-	- [4. Authentication](#4-authentication)
-		- [4.1 Login](#41-login)
-		- [4.2 Logout](#42-logout)
+<!-- TOC depthFrom:2 depthTo:6 insertAnchor:false orderedList:false updateOnSave:true withLinks:true -->
+
+- [1. One-off requests](#1-one-off-requests)
+	- [1.1 Read coil/register](#11-read-coilregister)
+	- [1.2 Write coil/register](#12-write-coilregister)
+	- [1.3 Get TCP connection timeout](#13-get-tcp-connection-timeout)
+	- [1.4 Set TCP connection timeout](#14-set-tcp-connection-timeout)
+- [2. Polling requests](#2-polling-requests)
+	- [2.1 Add request](#21-add-request)
+	- [2.2 Update request (interval)](#22-update-request-interval)
+	- [2.3 Read request status](#23-read-request-status)
+	- [2.4 Delete request](#24-delete-request)
+	- [2.5 Read history](#25-read-history)
+	- [2.6 Enable/Disable request](#26-enabledisable-request)
+	- [2.7 Read all requests](#27-read-all-requests)
+	- [2.8 Delete all requests](#28-delete-all-requests)
+	- [2.9 Enable/Disable all requests](#29-enabledisable-all-requests)
+	- [2.10 Import requests](#210-import-requests)
+	- [2.11 Export requests](#211-export-requests)
+- [3. Filter requests](#3-filter-requests)
+	- [3.1 Add filter](#31-add-filter)
+	- [3.2 Update filter](#32-update-filter)
+	- [3.3 Read filter status](#33-read-filter-status)
+	- [3.4 Delete filter](#34-delete-filter)
+	- [3.5 Enable/Disable filter](#35-enabledisable-filter)
+	- [3.6 Read all filters](#36-read-all-filters)
+	- [3.7 Delete all filters](#37-delete-all-filters)
+	- [3.8 Enable/Disable all filters](#38-enabledisable-all-filters)
+	- [3.9 Import filters](#39-import-filters)
+	- [3.10 Export filters](#310-export-filters)
+- [4. Authentication](#4-authentication)
+	- [4.1 Login](#41-login)
+	- [4.2 Logout](#42-logout)
 
 <!-- /TOC -->
 
@@ -847,6 +848,10 @@
 - Verb: **POST**
 - URI: /api/auth/login
 
+**TODO**
+
 ### 4.2 Logout
 - Verb: **GET**
 - URI: /api/auth/logout
+
+**TODO**
