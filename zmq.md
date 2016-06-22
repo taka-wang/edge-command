@@ -4,7 +4,7 @@
 
 <!-- TOC depthFrom:2 depthTo:2 insertAnchor:false orderedList:false updateOnSave:true withLinks:true -->
 
-- [0. Multipart Message](#0-multipart-message)
+- [0. Multipart message](#0-multipart-message)
 - [1. One-off requests](#1-one-off-requests)
 	- [1.1 Read coil/register](#11-read-coilregister)
 		- [1.1.1 To psmb](#111-to-psmb)
@@ -39,10 +39,10 @@
 <!-- /TOC -->
 
 
-## 0. Multipart Message
+## 0. Multipart message
 
 We can compose a message out of several frames, and then receiver will receive all parts of a message, or none at all.
-By the all-or-nothing characteristics, we can screen what we are interested from the first frame without parsing the whole JSON payload. 
+Thanks to the all-or-nothing characteristics, we can screen what we are interested from the first frame without parsing the whole JSON payload. 
 
 | Frame 1     |  Frame 2      |
 |:-----------:|:-------------:|
@@ -55,22 +55,24 @@ By the all-or-nothing characteristics, we can screen what we are interested from
 ### 1.1 Read coil/register
 Command name: **mbtcp.once.read**
 
-|params |description            |In            |type          |range     |example     |required          |
-|:------|:----------------------|:-------------|:-------------|:---------|:-----------|:-----------------|
-|fc     |function code          |path          |integer       |[1,4]     |1           |:heavy_check_mark:|
-|ip     |ip address             |query         |string        |-         |127.0.0.1   |:heavy_check_mark:|
-|port   |port number            |query         |string        |[1,65535] |502         | default: 502     |
-|slave  |slave id               |query         |integer       |[1, 253]  |1           |:heavy_check_mark:|
-|addr   |register start address |query         |integer       |-         |23          |:heavy_check_mark:|
-|len    |register length        |query         |integer       |-         |20          |default: 1        |
-|status |response status        |response body |string        |-         |"ok"        |:heavy_check_mark:|
-|data   |response value         |response body |integer array |          |[1,0,24,1]  |if success        |
+|params |description            |type          |range     |example     |required          |
+|:------|:----------------------|:-------------|:---------|:-----------|:-----------------|
+|fc     |function code          |integer       |[1,4]     |1           |:heavy_check_mark:|
+|ip     |ip address             |string        |-         |127.0.0.1   |:heavy_check_mark:|
+|port   |port number            |string        |[1,65535] |502         | default: 502     |
+|slave  |slave id               |integer       |[1, 253]  |1           |:heavy_check_mark:|
+|addr   |register start address |integer       |-         |23          |:heavy_check_mark:|
+|len    |register length        |integer       |-         |20          |default: 1        |
+|status |response status        |string        |-         |"ok"        |:heavy_check_mark:|
+|data   |response value         |integer array |          |[1,0,24,1]  |if success        |
 
 #### 1.1.1 To psmb
 
 ```JavaScript
 {
-    "from"
+    "from":
+    "tid:
+
 }
 ```
 
