@@ -5,16 +5,16 @@
 
 ### 1.1 Read coil/register 
 
-|param  |description         |Location  |type          |range     |example     |required          |
-|:------|:-------------------|:---------|:-------------|:---------|:-----------|:-----------------|
-|fc     |function code       |path      |integer       |[1,4]     |1           |:heavy_check_mark:|
-|ip     |IP address          |query     |string        |-         |127.0.0.1   |:heavy_check_mark:|
-|port   |port number         |query     |string        |[1,65535] |502         | default: 502     |
-|slave  |slave id            |query     |integer       |[1, 253]  |1           |:heavy_check_mark:|
-|addr   |register start addr |query     |integer       |-         |23          |:heavy_check_mark:|
-|len    |register length     |query     |integer       |-         |20          | default: 1       |
-|status |response status     |resp body |string        |-         |"ok"        |:heavy_check_mark:|
-|data   |response value      |resp body |integer array |          |[1,0,24,1]  |:x:               |
+|params |description            |In        |type          |range     |example     |required          |
+|:------|:----------------------|:---------|:-------------|:---------|:-----------|:-----------------|
+|fc     |function code          |path      |integer       |[1,4]     |1           |:heavy_check_mark:|
+|ip     |ip address             |query     |string        |-         |127.0.0.1   |:heavy_check_mark:|
+|port   |port number            |query     |string        |[1,65535] |502         | default: 502     |
+|slave  |slave id               |query     |integer       |[1, 253]  |1           |:heavy_check_mark:|
+|addr   |register start address |query     |integer       |-         |23          |:heavy_check_mark:|
+|len    |register length        |query     |integer       |-         |20          | default: 1       |
+|status |response status        |resp body |string        |-         |"ok"        |:heavy_check_mark:|
+|data   |response value         |resp body |integer array |          |[1,0,24,1]  |:x:               |
 
 - Verb: **GET**
 - URI: /api/mb/tcp/fc/**{fc}**
