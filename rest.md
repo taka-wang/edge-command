@@ -5,70 +5,70 @@
 
 ### 1.1 Read coil/register 
 
+|param  |description         |Location  |type          |range     |example     |required          |
+|:------|:-------------------|:---------|:-------------|:---------|:-----------|:-----------------|
+|fc     |function code       |path      |integer       |[1,4]     |1           |:heavy_check_mark:|
+|ip     |IP address          |query     |string        |-         |127.0.0.1   |:heavy_check_mark:|
+|port   |port number         |query     |string        |[1,65535] |502         | default: 502     |
+|slave  |slave id            |query     |integer       |[1, 253]  |1           |:heavy_check_mark:|
+|addr   |register start addr |query     |integer       |-         |23          |:heavy_check_mark:|
+|len    |register length     |query     |integer       |-         |20          | default: 1       |
+|status |response status     |resp body |string        |-         |"ok"        |:heavy_check_mark:|
+|data   |response value      |resp body |integer array |          |[1,0,24,1]  |:x:               |
+
 - Verb: **GET**
 - URI: /api/mb/tcp/fc/**{fc}**
-- query string: ?ip=**{ip}**&port=**{port}**&slave=**{slave}**&addr=**{addr}**&len=**{len}**
+- Query: ?ip=**{ip}**&port=**{port}**&slave=**{slave}**&addr=**{addr}**&len=**{len}**
+- Example: read single coil/register
 
-|param  |description         |Location |type          |range     |example   |required          |
-|:------|:-------------------|:--------|:-------------|:---------|:---------|:-----------------|
-|fc     |function code       |path     |integer       |[1,4]     |1         |:heavy_check_mark:|
-|ip     |IP address          |query    |string        |-         |127.0.0.1 |:heavy_check_mark:|
-|port   |port number         |query    |string        |[1,65535] |502       | default: 502     |
-|slave  |slave id            |query    |integer       |[1, 253]  |1         |:heavy_check_mark:|
-|addr   |register start addr |query    |integer       |-         |23        |:heavy_check_mark:|
-|len    |register length     |query    |integer       |-         |20        | default: 1       |
-|status |response status     |response |string        |-         |"ok"      |:heavy_check_mark:|
-|data   |response value      |response |integer array |          |[1,0,24,1]|:x:               |
+    - **Request**
+        - port: 502
+        - len: 1
+        - endpoint:
+        ```Bash
+        http://127.0.0.1/api/mb/tcp/fc/1?ip=192.168.3.2&slave=1&addr=10
+        ```
 
-- **[Request]** read single coil/register example
+    - **Response**
 
-    - port: 502
-    - len: 1
-    
-    ```Bash
-    http://127.0.0.1/api/mb/tcp/fc/1?ip=192.168.3.2&slave=1&addr=10
-    ```
+        - Success:
+        ```JavaScript
+        {
+            "status": "ok",
+            "data": [1]
+        }
+        ```
 
-- **[Response]** read single coil/register example
+        - Fail:
+        ```JavaScript
+        {
+            "status": "timeout"
+        }
+        ```
+- Examples: read multiple coils/registers
 
-    - Success:
-    ```JavaScript
-    {
-        "status": "ok",
-        "data": [1]
-    }
-    ```
+    - **Request**
+        - endpoint:
+        ```Bash
+        http://127.0.0.1/api/mb/tcp/fc/2?ip=192.168.3.2&port=503&slave=1&addr=10&len=10
+        ```
 
-    - Fail:
-    ```JavaScript
-    {
-        "status": "timeout"
-    }
-    ```
+    - **Response**
 
-- **[Request]** read multiple coils/registers example
+        - Success:
+        ```JavaScript
+        {
+            "status": "ok",
+            "data": [1, 0, 1, 0, 0, 0, 0, 0, 1, 0]
+        }
+        ```
 
-    ```Bash
-    http://127.0.0.1/api/mb/tcp/fc/2?ip=192.168.3.2&port=503&slave=1&addr=10&len=10
-    ```
-
-- **[Response]** read multiple coils/registers example
-
-    - Success:
-    ```JavaScript
-    {
-        "status": "ok",
-        "data": [1, 0, 1, 0, 0, 0, 0, 0, 1, 0]
-    }
-    ```
-
-    - Fail:
-    ```JavaScript
-    {
-        "status": "timeout"
-    }
-    ```
-
+        - Fail:
+        ```JavaScript
+        {
+            "status": "timeout"
+        }
+        ```
 ---
 
 ### 1.2 Write coil/register 
