@@ -1,4 +1,4 @@
-# Restful API 
+# REST API 
 
 
 ## 1. One-off requests
@@ -23,7 +23,7 @@
     - port: 502 **[default]**
     - len: 1 **[default]**
     
-    ```bash
+    ```Bash
     http://127.0.0.1/api/mb/tcp/fc/1?ip=192.168.3.2&slave=1&addr=10
 
     ```
@@ -47,7 +47,7 @@
 
 - **[Request]** read multiple coils/registers example
 
-    ```bash
+    ```Bash
     http://127.0.0.1/api/mb/tcp/fc/2?ip=192.168.3.2&port=503&slave=1&addr=10&len=10
     ```
 
@@ -90,7 +90,7 @@
 
     - port: 502
 
-    ```bash
+    ```Bash
     http://127.0.0.1/api/mb/tcp/fc/5
     ```
     
@@ -122,7 +122,7 @@
 
 - **[Request]** write multiple coils/registers example
 
-    ```bash
+    ```Bash
     http://127.0.0.1/api/mb/tcp/fc/5
     ```
     
@@ -164,8 +164,8 @@
 
 - **[Request]** example
 
-    ```bash
-        http://127.0.0.1/api/mb/tcp/timeout
+    ```Bash
+    http://127.0.0.1/api/mb/tcp/timeout
     ```
 
 - **[Response]** example
@@ -193,8 +193,8 @@
 - **[Request]** example
 
     - URI:
-    ```bash
-        http://127.0.0.1/api/mb/tcp/timeout
+    ```Bash
+    http://127.0.0.1/api/mb/tcp/timeout
     ```
     
     - Payload:
@@ -243,7 +243,7 @@
 - **[Request]** example
 
     - URI:
-    ```bash
+    ```Bash
     http://127.0.0.1/api/mb/tcp/poll/led_1
 
     ```
@@ -285,7 +285,7 @@
 - **[Request]** example
 
     - URI:
-    ```bash
+    ```Bash
     http://127.0.0.1/api/mb/tcp/poll/led_1
 
     ```
@@ -321,7 +321,7 @@
 - **[Request]** example
 
     - URI:
-    ```bash
+    ```Bash
     http://127.0.0.1/api/mb/tcp/poll/led_1
 
     ```
@@ -360,9 +360,8 @@
 - **[Request]** example
 
     - URI:
-    ```bash
+    ```Bash
     http://127.0.0.1/api/mb/tcp/poll/led_1
-
     ```
     - **Note:** No payload!!
 
@@ -390,9 +389,8 @@
 - **[Request]** example
 
     - URI:
-    ```bash
+    ```Bash
     http://127.0.0.1/api/mb/tcp/poll/led_1/logs
-
     ```
     - **Note:** No payload!!
 
@@ -435,7 +433,6 @@
     - URI:
     ```bash
     http://127.0.0.1/api/mb/tcp/poll/led_1/toggle
-
     ```
     - Payload:
     ```JavaScript
@@ -468,8 +465,9 @@
 - **[Request]** example
 
     - URI:
-    ```bash
+    ```Bash
     http://127.0.0.1/api/mb/tcp/polls
+    ```
 
 - **[Response]** example
 
@@ -512,6 +510,7 @@
     }
     ```
 
+
 ### 2.8 Delete all requests
 
 - Verb: **DELETE**
@@ -520,8 +519,9 @@
 - **[Request]** example
 
     - URI:
-    ```bash
+    ```Bash
     http://127.0.0.1/api/mb/tcp/polls
+    ```
 
 - **[Response]** example
 
@@ -547,9 +547,8 @@
 - **[Request]** example
 
     - URI:
-    ```bash
+    ```Bash
     http://127.0.0.1/api/mb/tcp/polls/toggle
-
     ```
     - Payload:
     ```JavaScript
@@ -582,7 +581,7 @@
 - **[Request]** example
 
     - URI:
-    ```bash
+    ```Bash
     http://127.0.0.1/api/mb/tcp/polls/import
 
     ```
@@ -640,7 +639,7 @@
 - **[Request]** example
 
     - URI:
-    ```bash
+    ```Bash
     http://127.0.0.1/api/mb/tcp/polls/export
 
     ```
