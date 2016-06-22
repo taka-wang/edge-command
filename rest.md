@@ -663,6 +663,9 @@
 
 ### 2.10 Import requests
 
+**TODO**
+This API should be modified to load file (filename required).
+
 |params       |description            |In            |type          |range                  |example     |required          |
 |:------------|:----------------------|:-------------|:-------------|:----------------------|:-----------|:-----------------|
 |polls        |request object array   |request body  |object array  |-                      |-           |:heavy_check_mark:|
@@ -734,6 +737,9 @@
 
 
 ### 2.11 Export requests
+
+**TODO**
+This API should be modified to save file (filename required).
 
 |params       |description            |In             |type          |range                  |example     |required          |
 |:------------|:----------------------|:--------------|:-------------|:----------------------|:-----------|:-----------------|
