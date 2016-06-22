@@ -31,6 +31,9 @@
 		- [3.8 Enable/Disable all filters](#38-enabledisable-all-filters)
 		- [3.9 Import filters](#39-import-filters)
 		- [3.10 Export filters](#310-export-filters)
+	- [4. Authentication](#4-authentication)
+		- [4.1 Login](#41-login)
+		- [4.2 Logout](#42-logout)
 
 <!-- /TOC -->
 
@@ -837,3 +840,13 @@
 ### 3.10 Export filters
 - Verb: **GET**
 - URI: /api/mb/tcp/filters/export
+
+## 4. Authentication
+
+### 4.1 Login
+- Verb: **POST**
+- URI: /api/auth/login
+
+### 4.2 Logout
+- Verb: **GET**
+- URI: /api/auth/logout
