@@ -15,7 +15,7 @@
 	- [2.3 Read request status](#23-read-request-status)
 	- [2.4 Delete request](#24-delete-request)
 	- [2.5 Enable/Disable request](#25-enabledisable-request)
-	- [2.6 Read all requests](#26-read-all-requests)
+	- [2.6 Read all requests status](#26-read-all-requests-status)
 	- [2.7 Delete all requests](#27-delete-all-requests)
 	- [2.8 Enable/Disable all requests](#28-enabledisable-all-requests)
 	- [2.9 Import requests](#29-import-requests)
@@ -479,7 +479,7 @@
         }
         ```
  
-### 2.6 Read all requests
+### 2.6 Read all requests status
 
 |params       |description            |In            |type          |range                  |example     |required          |
 |:------------|:----------------------|:-------------|:-------------|:----------------------|:-----------|:-----------------|
