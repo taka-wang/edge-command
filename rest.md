@@ -9,24 +9,24 @@
 - URI: /api/mb/tcp/fc/**{fc}**
 - query string: ?ip=**{ip}**&port=**{port}**&slave=**{slave}**&addr=**{addr}**&len=**{len}**
 
-|param  |description         |Location |type   |range     |example   |required    |
-|:------|:-------------------|:--------|:------|:---------|:---------|:-----------|
-|fc     |function code       |path     |integer|[1,4]     |1         |:heavy_check_mark:        |
-|ip     |IP address          |query    |string |-         |127.0.0.1 |:heavy_check_mark:          |
-|port   |port number         |query    |string |[1,65535] |502       |:x: default: 502|
-|slave  |slave id            |query    |integer|[1, 253]  |1         |*           |
-|addr   |register start addr |query    |integer|-         |23        |*           |
-|len    |register length     |query    |integer|-         |20        |:x: default: 1  |
-|status |response status     |response |string |-         |"ok"      |*           |
+|param  |description         |Location |type          |range     |example   |required          |
+|:------|:-------------------|:--------|:-------------|:---------|:---------|:-----------------|
+|fc     |function code       |path     |integer       |[1,4]     |1         |:heavy_check_mark:|
+|ip     |IP address          |query    |string        |-         |127.0.0.1 |:heavy_check_mark:|
+|port   |port number         |query    |string        |[1,65535] |502       | default: 502     |
+|slave  |slave id            |query    |integer       |[1, 253]  |1         |:heavy_check_mark:|
+|addr   |register start addr |query    |integer       |-         |23        |:heavy_check_mark:|
+|len    |register length     |query    |integer       |-         |20        | default: 1       |
+|status |response status     |response |string        |-         |"ok"      |:heavy_check_mark:|
+|data   |response value      |response |integer array |          |[1,0,24,1]|:x:               |
 
 - **[Request]** read single coil/register example
 
-    - port: 502 **[default]**
-    - len: 1 **[default]**
+    - port: 502
+    - len: 1
     
     ```Bash
     http://127.0.0.1/api/mb/tcp/fc/1?ip=192.168.3.2&slave=1&addr=10
-
     ```
 
 - **[Response]** read single coil/register example
