@@ -11,8 +11,8 @@
 
 |param  |description         |Location |type   |range     |example   |required    |
 |:------|:-------------------|:--------|:------|:---------|:---------|:-----------|
-|fc     |function code       |path     |integer|[1,4]     |1         |[x]           |
-|ip     |IP address          |query    |string |-         |127.0.0.1 |[x]           |
+|fc     |function code       |path     |integer|[1,4]     |1         |:white_check_mark:         |
+|ip     |IP address          |query    |string |-         |127.0.0.1 |:white_check_mark:          |
 |port   |port number         |query    |string |[1,65535] |502       |[] default: 502|
 |slave  |slave id            |query    |integer|[1, 253]  |1         |*           |
 |addr   |register start addr |query    |integer|-         |23        |*           |
