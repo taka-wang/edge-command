@@ -14,13 +14,13 @@
 	- [2.2 Update request (interval)](#22-update-request-interval)
 	- [2.3 Read request status](#23-read-request-status)
 	- [2.4 Delete request](#24-delete-request)
-	- [2.5 Read history](#25-read-history)
-	- [2.6 Enable/Disable request](#26-enabledisable-request)
-	- [2.7 Read all requests](#27-read-all-requests)
-	- [2.8 Delete all requests](#28-delete-all-requests)
-	- [2.9 Enable/Disable all requests](#29-enabledisable-all-requests)
-	- [2.10 Import requests](#210-import-requests)
-	- [2.11 Export requests](#211-export-requests)
+	- [2.5 Enable/Disable request](#25-enabledisable-request)
+	- [2.6 Read all requests](#26-read-all-requests)
+	- [2.7 Delete all requests](#27-delete-all-requests)
+	- [2.8 Enable/Disable all requests](#28-enabledisable-all-requests)
+	- [2.9 Import requests](#29-import-requests)
+	- [2.10 Export requests](#210-export-requests)
+	- [2.11 Read history](#211-read-history)
 - [3. Filter requests](#3-filter-requests)
 	- [3.1 Add filter](#31-add-filter)
 	- [3.2 Update filter](#32-update-filter)
@@ -439,55 +439,7 @@
         }
         ```
 
-### 2.5 Read history
-
-|params   |description            |In            |type          |range                  |example     |required          |
-|:--------|:----------------------|:-------------|:-------------|:----------------------|:-----------|:-----------------|
-|**name** |request/sensor name    |path          |string        |no space and **unique**|led_1       |:heavy_check_mark:|
-|status   |response status        |response body |string        |-                      |"ok"        |:heavy_check_mark:|
-|data(1)  |outer data             |response body |object array  |-                      |-           |if success        |
-|data(2)  |inner data             |response body |integer array |                       |[1,0,24,1]  |if success        |
-|ts       |time stamp             |response body |integer       |-                      |-           |if success        |
-
-- Verb: **GET**
-- URI: /api/mb/tcp/poll/**{name}**/logs
-- Example:
-
-    - **Request**
-        - endpoint:
-        ```Bash
-        /api/mb/tcp/poll/led_1/logs
-        ```
-
-    - **Response**
-        - success (len=1):
-        ```JavaScript
-        {
-            "status": "ok",
-            "data":[{"data": [1], "ts": 2012031203},
-                    {"data": [0], "ts": 2012031205},
-                    {"data": [1], "ts": 2012031207}]        
-        }
-        ```
-        
-        - success (len=n):
-        ```JavaScript
-        {
-            "status": "ok",
-            "data":[{"data": [1,0,1], "ts": 2012031203},
-                    {"data": [1,1,1], "ts": 2012031205},
-                    {"data": [0,0,1], "ts": 2012031207}]        
-        }
-        ```
-
-        - fail:
-        ```JavaScript
-        {
-            "status": "not exist"
-        }
-        ```
-
-### 2.6 Enable/Disable request
+### 2.5 Enable/Disable request
 
 |params       |description            |In            |type          |range                  |example     |required          |
 |:------------|:----------------------|:-------------|:-------------|:----------------------|:-----------|:-----------------|
@@ -527,7 +479,7 @@
         }
         ```
  
-### 2.7 Read all requests
+### 2.6 Read all requests
 
 |params       |description            |In            |type          |range                  |example     |required          |
 |:------------|:----------------------|:-------------|:-------------|:----------------------|:-----------|:-----------------|
@@ -593,7 +545,7 @@
             }
             ```
 
-### 2.8 Delete all requests
+### 2.7 Delete all requests
 
 |params       |description            |In            |type          |range      |example     |required          |
 |:------------|:----------------------|:-------------|:-------------|:----------|:-----------|:-----------------|
@@ -623,7 +575,7 @@
         }
         ```
 
-### 2.9 Enable/Disable all requests
+### 2.8 Enable/Disable all requests
 
 |params       |description            |In            |type          |range      |example     |required          |
 |:------------|:----------------------|:-------------|:-------------|:----------|:-----------|:-----------------|
@@ -661,7 +613,7 @@
         }
         ```
 
-### 2.10 Import requests
+### 2.9 Import requests
 
 **TODO**
 :heavy_exclamation_mark: This API should be modified to load file (filename required).
@@ -736,7 +688,7 @@
         ```
 
 
-### 2.11 Export requests
+### 2.10 Export requests
 
 **TODO**
 :heavy_exclamation_mark: This API should be modified to save file (filename required).
@@ -801,6 +753,54 @@
         ```JavaScript
         {
             "status": "timeout"
+        }
+        ```
+
+### 2.11 Read history
+
+|params   |description            |In            |type          |range                  |example     |required          |
+|:--------|:----------------------|:-------------|:-------------|:----------------------|:-----------|:-----------------|
+|**name** |request/sensor name    |path          |string        |no space and **unique**|led_1       |:heavy_check_mark:|
+|status   |response status        |response body |string        |-                      |"ok"        |:heavy_check_mark:|
+|data(1)  |outer data             |response body |object array  |-                      |-           |if success        |
+|data(2)  |inner data             |response body |integer array |                       |[1,0,24,1]  |if success        |
+|ts       |time stamp             |response body |integer       |-                      |-           |if success        |
+
+- Verb: **GET**
+- URI: /api/mb/tcp/poll/**{name}**/logs
+- Example:
+
+    - **Request**
+        - endpoint:
+        ```Bash
+        /api/mb/tcp/poll/led_1/logs
+        ```
+
+    - **Response**
+        - success (len=1):
+        ```JavaScript
+        {
+            "status": "ok",
+            "data":[{"data": [1], "ts": 2012031203},
+                    {"data": [0], "ts": 2012031205},
+                    {"data": [1], "ts": 2012031207}]        
+        }
+        ```
+        
+        - success (len=n):
+        ```JavaScript
+        {
+            "status": "ok",
+            "data":[{"data": [1,0,1], "ts": 2012031203},
+                    {"data": [1,1,1], "ts": 2012031205},
+                    {"data": [0,0,1], "ts": 2012031207}]        
+        }
+        ```
+
+        - fail:
+        ```JavaScript
+        {
+            "status": "not exist"
         }
         ```
 
