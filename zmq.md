@@ -1,4 +1,4 @@
-# ZMQ
+# ZeroMQ
 
 # Table of contents
 
@@ -55,16 +55,16 @@ Thanks to the all-or-nothing characteristics, we can screen what we are interest
 ### 1.1 Read coil/register
 Command name: **mbtcp.once.read**
 
-|params |description            |type          |range     |example     |required          |
-|:------|:----------------------|:-------------|:---------|:-----------|:-----------------|
-|fc     |function code          |integer       |[1,4]     |1           |:heavy_check_mark:|
-|ip     |ip address             |string        |-         |127.0.0.1   |:heavy_check_mark:|
-|port   |port number            |string        |[1,65535] |502         | default: 502     |
-|slave  |slave id               |integer       |[1, 253]  |1           |:heavy_check_mark:|
-|addr   |register start address |integer       |-         |23          |:heavy_check_mark:|
-|len    |register length        |integer       |-         |20          |default: 1        |
-|status |response status        |string        |-         |"ok"        |:heavy_check_mark:|
-|data   |response value         |integer array |          |[1,0,24,1]  |if success        |
+| params   | description            | type          | range     | example     | required           |
+|:---------|:-----------------------|:--------------|:----------|:------------|:-------------------|
+| fc       | function code          | integer       | [1,4]     | 1           | :heavy_check_mark: |
+| ip       | ip address             | string        | -         | 127.0.0.1   | :heavy_check_mark: |
+| port     | port number            | string        | [1,65535] | 502         | default: 502       |
+| slave    | slave id               | integer       | [1, 253]  | 1           | :heavy_check_mark: |
+| addr     | register start address | integer       | -         | 23          | :heavy_check_mark: |
+| len      | register length        | integer       | -         | 20          | default: 1         |
+| status   | response status        | string        | -         | "ok"        | :heavy_check_mark: |
+| data     | response value         | integer array |           | [1,0,24,1]  | if success         |
 
 #### 1.1.1 To psmb
 
