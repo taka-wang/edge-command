@@ -35,6 +35,9 @@
 - [4. Authentication](#4-authentication)
 	- [4.1 Login](#41-login)
 	- [4.2 Logout](#42-logout)
+	- [4.3 Update username](#43-update-username)
+	- [4.4 Update password](#44-update-password)
+	- [4.5 Reset authetication setting](#45-reset-authetication-setting)
 
 <!-- /TOC -->
 
@@ -859,5 +862,11 @@
 ### 4.2 Logout
 - Verb: **GET**
 - URI: /api/auth/logout
+
+### 4.3 Update username
+
+### 4.4 Update password
+
+### 4.5 Reset authetication setting
 
 **TODO**
