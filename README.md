@@ -1,5 +1,4 @@
-# Command Definitions
-
+# Edge-Command
 
 ## Table of Content
 
@@ -10,3 +9,7 @@
 5. [DDS](dds.md)
 
 ---
+
+## Service block
+
+![services](services.png)
