@@ -124,7 +124,7 @@ Command name: **mbtcp.once.read**
 	"slave": 1,
 	"addr": 10,
 	"len": 4,
-	"type: 2,
+	"type": 2,
 	"order": 0
 }
 ```
@@ -140,7 +140,7 @@ Command name: **mbtcp.once.read**
 	"slave": 1,
 	"addr": 10,
 	"len": 4,
-	"type: 4,
+	"type": 4,
 	"order": 2
 }
 ```
@@ -156,7 +156,7 @@ Command name: **mbtcp.once.read**
 	"slave": 1,
 	"addr": 10,
 	"len": 4,
-	"type: 4,
+	"type": 4,
 	"range": 
 	{
 		"a": 0,
@@ -195,7 +195,7 @@ Command name: **mbtcp.once.read**
 {
 	"tid": 123456,
 	"status": "ok",
-	"type: 0,
+	"type": 0,
 	"data": [255, 1234, 789]
 }
 ```
@@ -205,7 +205,7 @@ Command name: **mbtcp.once.read**
 {
 	"tid": 123456,
 	"status": "ok",
-	"type: 1,
+	"type": 1,
 	"raw": [255, 1234, 789],
 	"data": "112C004F12345678"
 }
@@ -226,7 +226,7 @@ Command name: **mbtcp.once.read**
 {
 	"tid": 123456,
 	"status": "ok",
-	"type: 0,
+	"type": 0,
 	"raw": [255, 1234, 789],
 	"data": [255, 1234, 789]
 }
@@ -237,7 +237,7 @@ Command name: **mbtcp.once.read**
 {
 	"tid": 123456,
 	"status": "ok",
-	"type: 1,
+	"type": 1,
 	"raw": [65538, 456, 789],
 	"data": [65538, 456, 789]
 }
