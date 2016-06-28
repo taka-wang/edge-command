@@ -13,7 +13,11 @@
 		- [1.2.1 services to psmb](#121-services-to-psmb)
 		- [1.2.2 psmb to services](#122-psmb-to-services)
 	- [1.3 Get TCP connection timeout](#13-get-tcp-connection-timeout)
+		- [1.3.1 services to psmb](#131-services-to-psmb)
+		- [1.3.2 psmb to services](#132-psmb-to-services)
 	- [1.4 Set TCP connection timeout](#14-set-tcp-connection-timeout)
+		- [1.4.1 services to psmb](#141-services-to-psmb)
+		- [1.4.2 psmb to services](#142-psmb-to-services)
 - [2. Polling requests](#2-polling-requests)
 	- [2.1 Add request](#21-add-request)
 	- [2.2 Update request (interval)](#22-update-request-interval)
@@ -457,8 +461,78 @@ Command name: **mbtcp.once.write**
 ### 1.3 Get TCP connection timeout
 Command name: **mbtcp.timeout.read**
 
+>| params   | description            | type          | range          | example        | required                                     |
+>|:---------|:-----------------------|:--------------|:---------------|:---------------|:---------------------------------------------|
+>| from     | service name           | string        | -              | "web"          | optional                                     |
+>| tid      | transaction ID         | integer       | uint64         | 12345          | :heavy_check_mark:                           |
+>| timeout  | timeout in usec        | integer       | [200000,~)	  | 210000         | if success                                   |
+>| status   | response status        | string        | -              | "ok"           | :heavy_check_mark:                           |
+
+#### 1.3.1 services to psmb
+
+```JavaScript
+{
+    "from": "web",
+    "tid": 123456
+}
+```
+
+#### 1.3.2 psmb to services
+
+- success:
+```JavaScript
+{
+    "tid": 123456,
+    "timeout": 210000,
+    "status": "ok"
+}
+```
+
+- fail:
+```JavaScript
+{
+    "tid": 123456,
+    "status": "timeout"
+}
+```
+
 ### 1.4 Set TCP connection timeout
 Command name: **mbtcp.timeout.update**
+
+>| params   | description            | type          | range          | example        | required                                     |
+>|:---------|:-----------------------|:--------------|:---------------|:---------------|:---------------------------------------------|
+>| from     | service name           | string        | -              | "web"          | optional                                     |
+>| tid      | transaction ID         | integer       | uint64         | 12345          | :heavy_check_mark:                           |
+>| timeout  | timeout in usec        | integer       | [200000,~)	  | 210000         | :heavy_check_mark:                           |
+>| status   | response status        | string        | -              | "ok"           | :heavy_check_mark:                           |
+
+#### 1.4.1 services to psmb
+
+```JavaScript
+{
+    "from": "web",
+    "tid": 123456,
+    "timeout": 210000
+}
+```
+
+#### 1.4.2 psmb to services
+
+- success:
+```JavaScript
+{
+    "tid": 123456,
+    "status": "ok"
+}
+```
+
+- fail:
+```JavaScript
+{
+    "tid": 123456,
+    "status": "timeout"
+}
+```
 
 ---
 
