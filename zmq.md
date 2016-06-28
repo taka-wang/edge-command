@@ -88,7 +88,7 @@ Command name: **mbtcp.once.read**
 ```JavaScript
 {
     "from": "web",
-    "tid: 123456,
+    "tid": 123456,
 	"fc" : 1,
 	"ip": "192.168.0.1",
 	"port": "503",
@@ -102,7 +102,7 @@ Command name: **mbtcp.once.read**
 ```JavaScript
 {
     "from": "web",
-    "tid: 123456,
+    "tid": 123456,
 	"fc" : 3,
 	"ip": "192.168.0.1",
 	"port": "503",
@@ -117,7 +117,7 @@ Command name: **mbtcp.once.read**
 ```JavaScript
 {
     "from": "web",
-    "tid: 123456,
+    "tid": 123456,
 	"fc" : 3,
 	"ip": "192.168.0.1",
 	"port": "503",
@@ -133,7 +133,7 @@ Command name: **mbtcp.once.read**
 ```JavaScript
 {
     "from": "web",
-    "tid: 123456,
+    "tid": 123456,
 	"fc" : 3,
 	"ip": "192.168.0.1",
 	"port": "503",
@@ -149,7 +149,7 @@ Command name: **mbtcp.once.read**
 ```JavaScript
 {
     "from": "web",
-    "tid: 123456,
+    "tid": 123456,
 	"fc" : 3,
 	"ip": "192.168.0.1",
 	"port": "503",
