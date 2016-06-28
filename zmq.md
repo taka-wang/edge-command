@@ -109,7 +109,7 @@ Command name: **mbtcp.once.read**
 	"slave": 1,
 	"addr": 10,
 	"len": 4,
-	"type: 0
+	"type": 0
 }
 ```
 
