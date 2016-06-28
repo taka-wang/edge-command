@@ -1,4 +1,4 @@
-# ZeroMQ
+# Zero MQ Command Definition
 
 # Table of contents
 
@@ -60,36 +60,36 @@ Thanks to the all-or-nothing characteristics, we can screen what we are interest
 
 **Data type**
 
->| type| description                                   | args                                          | example                     | note   |
->|:----|:----------------------------------------------|:----------------------------------------------|:----------------------------|:-------|
->| 0   | raw register array (0xABCD hex array)         | -                                             | [0xABCD, 0x1234, 0xAB12]    | -      |
->| 1   | hexadecimal string                            | -                                             | "112C004F12345678"          | -      |
->| 2   | linearly scale uint16 to desired range        | range: a (low), b (high), c (low), d (high)   | [22.34, 33.12, 44.56]       | -      |
->| 3   | uint16                                        | order: 0 (big-endian), 1 (little-endian)      | [123, 456, 789]             | -      |
->| 4   | int16                                         | order: 0 (big-endian), 1 (little-endian)      | [123, 456, 789]             | -      |
->| 5   | uint32                                        | order: 0 (ABCD), 1 (DCBA), 2 (BADC), 3 (CDAB) | [65538, 456, 789]           | len: 2x|
->| 6   | int32                                         | order: 0 (ABCD), 1 (DCBA), 2 (BADC), 3 (CDAB) | [65538, 456, 789]           | len: 2x|
->| 7   | float32                                       | order: 0 (ABCD), 1 (DCBA), 2 (BADC), 3 (CDAB) | [22.34, 33.12, 44.56]       | len: 2x|
+>| type| description                            | args                                          | example                     | note    |
+>|:----|:---------------------------------------|:----------------------------------------------|:----------------------------|:--------|
+>| 0   | raw register array (0xABCD hex array)  | -                                             | [0xABCD, 0x1234, 0xAB12]    | -       |
+>| 1   | hexadecimal string                     | -                                             | "112C004F12345678"          | -       |
+>| 2   | linearly scale uint16 to desired range | range: a (low), b (high), c (low), d (high)   | [22.34, 33.12, 44.56]       | -       |
+>| 3   | uint16                                 | order: 0 (big-endian), 1 (little-endian)      | [123, 456, 789]             | -       |
+>| 4   | int16                                  | order: 0 (big-endian), 1 (little-endian)      | [123, 456, 789]             | -       |
+>| 5   | uint32                                 | order: 0 (ABCD), 1 (DCBA), 2 (BADC), 3 (CDAB) | [65538, 456, 789]           | len: 2x |
+>| 6   | int32                                  | order: 0 (ABCD), 1 (DCBA), 2 (BADC), 3 (CDAB) | [65538, 456, 789]           | len: 2x |
+>| 7   | float32                                | order: 0 (ABCD), 1 (DCBA), 2 (BADC), 3 (CDAB) | [22.34, 33.12, 44.56]       | len: 2x |
 
 ### 1.1 Read coil/register
 Command name: **mbtcp.once.read**
 
->| params   | description            | type          | range     | example        | required                                 |
->|:---------|:-----------------------|:--------------|:----------|:---------------|:-----------------------------------------|
->| from     | service name           | string        | -         | "web"          | optional                                 |
->| tid      | transaction ID         | integer       | uint64    | 12345          | :heavy_check_mark:                       |
->| fc       | function code          | integer       | [1,4]     | 1              | :heavy_check_mark:                       |
->| ip       | ip address             | string        | -         | 127.0.0.1      | :heavy_check_mark:                       |
->| port     | port number            | string        | [1,65535] | 502            | default: 502                             |
->| slave    | slave id               | integer       | [1, 253]  | 1              | :heavy_check_mark:                       |
->| addr     | register start address | integer       | -         | 23             | :heavy_check_mark:                       |
->| len      | bit/register length    | integer       | -         | 20             | default: 1                               |
->| type     | data type              | category      | [0,7]     | see below      | default: 0, **fc 3, 4 only**             |
->| order    | endian                 | category      | [0,3]     | see below      | default: 0, **fc 3, 4 and type 3~7 only**|
->| range    | scale range            | 4 floats      | -         | see below      | fc 3, 4 and type 2 only                  |
->| status   | response status        | string        | -         | "ok"           | :heavy_check_mark:                       |
->| data     | response value         | integer array |           | [1,0,24,1]     | if success                               |
->| bytes    | response byte array    | bytes array   | -         | [AB,12,CD,ED]  | fc 3, 4 and type 1~7 only                |
+>| params   | description            | type          | range     | example           | required                                 |
+>|:---------|:-----------------------|:--------------|:----------|:------------------|:-----------------------------------------|
+>| from     | service name           | string        | -         | "web"             | optional                                 |
+>| tid      | transaction ID         | integer       | uint64    | 12345             | :heavy_check_mark:                       |
+>| fc       | function code          | integer       | [1,4]     | 1                 | :heavy_check_mark:                       |
+>| ip       | ip address             | string        | -         | 127.0.0.1         | :heavy_check_mark:                       |
+>| port     | port number            | string        | [1,65535] | 502               | default: 502                             |
+>| slave    | slave id               | integer       | [1, 253]  | 1                 | :heavy_check_mark:                       |
+>| addr     | register start address | integer       | -         | 23                | :heavy_check_mark:                       |
+>| len      | bit/register length    | integer       | -         | 20                | default: 1                               |
+>| type     | data type              | category      | [0,7]     | see below         | default: 0, **fc 3, 4 only**             |
+>| order    | endian                 | category      | [0,3]     | see below         | default: 0, **fc 3, 4 and type 3~7 only**|
+>| range    | scale range            | 4 floats      | -         | see below         | fc 3, 4 and type 2 only                  |
+>| status   | response status        | string        | -         | "ok"              | :heavy_check_mark:                       |
+>| data     | response value         | integer array |           | [1, 0, 24, 1]     | if success                               |
+>| bytes    | response byte array    | bytes array   | -         | [AB, 12, CD, ED]  | fc 3, 4 and type 1~7 only                |
 
 
 #### 1.1.1 services to psmb
@@ -333,19 +333,22 @@ Command name: **mbtcp.once.read**
 ### 1.2 Write coil/register
 Command name: **mbtcp.once.write**
 
->| params   | description            | type          | range          | example        | required                                     |
->|:---------|:-----------------------|:--------------|:---------------|:---------------|:---------------------------------------------|
->| from     | service name           | string        | -              | "web"          | optional                                     |
->| tid      | transaction ID         | integer       | uint64         | 12345          | :heavy_check_mark:                           |
->| fc       | function code          | integer       | [1,4]          | 1              | :heavy_check_mark:                           |
->| ip       | ip address             | string        | -              | 127.0.0.1      | :heavy_check_mark:                           |
->| port     | port number            | string        | [1,65535]      | 502            | default: 502                                 |
->| slave    | slave id               | integer       | [1, 253]       | 1              | :heavy_check_mark:                           |
->| addr     | register start address | integer       | -              | 23             | :heavy_check_mark:                           |
->| len      | bit/register length    | integer       | -              | 20             | **FC15, 16 only**                            |
->| type     | data type              | category      | [0,1]          | 0              | default: 0; decimal string(0), hex string(1); **FC6, 16 only** |
->| data     | data to be write       | string        | hex/dec string | -              | :heavy_check_mark:                           |
->| status   | response status        | string        | -              | "ok"           | :heavy_check_mark:                           |
+>| params   | description            | type          | range          | example        | required                                                       |
+>|:---------|:-----------------------|:--------------|:---------------|:---------------|:---------------------------------------------------------------|
+>| from     | service name           | string        | -              | "web"          | optional                                                       |
+>| tid      | transaction ID         | integer       | uint64         | 12345          | :heavy_check_mark:                                             |
+>| fc       | function code          | integer       | [1,4]          | 1              | :heavy_check_mark:                                             |
+>| ip       | ip address             | string        | -              | 127.0.0.1      | :heavy_check_mark:                                             |
+>| port     | port number            | string        | [1,65535]      | 502            | default: 502                                                   |
+>| slave    | slave id               | integer       | [1, 253]       | 1              | :heavy_check_mark:                                             |
+>| addr     | register start address | integer       | -              | 23             | :heavy_check_mark:                                             |
+>| len      | bit/register length    | integer       | -              | 20             | **FC15, 16 only**                                              |
+>| type(**) | data type              | category      | [0,1]          | 0              | default: 0; decimal string(0), hex string(1); **FC6, 16 only** |
+>| type(***)| data type              | category      | [0,1]          | 0              | default: 0; bits array(0), bits string(1); **FC15 only**       |
+>| data(*)  | data to be write       | integer       | [0,1]          | 1              | **FC5 only**                                                   |
+>| data(**) | data to be write       | string        | hex/dec string | -              | **FC6, 16 only**                                               |
+>| data(***)| data to be write       | array/string  | bit arr/string | -              | **FC15 only**                                                  |
+>| status   | response status        | string        | -              | "ok"           | :heavy_check_mark:                                             |
 
 #### 1.2.1 services to psmb
 
@@ -354,12 +357,12 @@ Command name: **mbtcp.once.write**
 {
     "from": "web",
     "tid": 123456,
-	"fc" : 3,
+	"fc" : 5,
 	"ip": "192.168.0.1",
 	"port": "503",
 	"slave": 1,
 	"addr": 10,
-	"data": "1"
+	"data": 1
 }
 ```
 
@@ -368,7 +371,7 @@ Command name: **mbtcp.once.write**
 {
     "from": "web",
     "tid": 123456,
-	"fc" : 3,
+	"fc" : 6,
 	"ip": "192.168.0.1",
 	"port": "503",
 	"slave": 1,
@@ -383,7 +386,7 @@ Command name: **mbtcp.once.write**
 {
     "from": "web",
     "tid": 123456,
-	"fc" : 3,
+	"fc" : 6,
 	"ip": "192.168.0.1",
 	"port": "503",
 	"slave": 1,
@@ -393,17 +396,34 @@ Command name: **mbtcp.once.write**
 }
 ```
 
-**bits write (FC15) - write multiple bits**
+**bits write (FC15) - write multiple bits (type 0)**
 ```JavaScript
 {
     "from": "web",
     "tid": 123456,
-	"fc" : 3,
+	"fc" : 15,
 	"ip": "192.168.0.1",
 	"port": "503",
 	"slave": 1,
 	"addr": 10,
 	"len": 4,
+	"type": 0,
+	"data": [1,0,1,0]
+}
+```
+
+**bits write (FC15) - write multiple bits (type 1)**
+```JavaScript
+{
+    "from": "web",
+    "tid": 123456,
+	"fc" : 15,
+	"ip": "192.168.0.1",
+	"port": "503",
+	"slave": 1,
+	"addr": 10,
+	"len": 4,
+	"type": 1,
 	"data": "1,0,1,0"
 }
 ```
@@ -413,7 +433,7 @@ Command name: **mbtcp.once.write**
 {
     "from": "web",
     "tid": 123456,
-	"fc" : 3,
+	"fc" : 16,
 	"ip": "192.168.0.1",
 	"port": "503",
 	"slave": 1,
@@ -429,7 +449,7 @@ Command name: **mbtcp.once.write**
 {
     "from": "web",
     "tid": 123456,
-	"fc" : 3,
+	"fc" : 16,
 	"ip": "192.168.0.1",
 	"port": "503",
 	"slave": 1,
