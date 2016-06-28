@@ -25,6 +25,7 @@
 - web service -> psmb
     - decimal string, ex: "255,123,456"
     - hex string, ex: "AB12EF34" (4n)
+    - bit string, ex: "1,0,1,0,1,1"
 
 - ws -> psmb
     same as web service -> psmb

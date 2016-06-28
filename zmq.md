@@ -10,6 +10,8 @@
 		- [1.1.1 services to psmb](#111-services-to-psmb)
 		- [1.1.2 psmb to services](#112-psmb-to-services)
 	- [1.2 Write coil/register](#12-write-coilregister)
+		- [1.2.1 services to psmb](#121-services-to-psmb)
+		- [1.2.2 psmb to services](#122-psmb-to-services)
 	- [1.3 Get TCP connection timeout](#13-get-tcp-connection-timeout)
 	- [1.4 Set TCP connection timeout](#14-set-tcp-connection-timeout)
 - [2. Polling requests](#2-polling-requests)
@@ -326,6 +328,131 @@ Command name: **mbtcp.once.read**
 
 ### 1.2 Write coil/register
 Command name: **mbtcp.once.write**
+
+>| params   | description            | type          | range          | example        | required                                     |
+>|:---------|:-----------------------|:--------------|:---------------|:---------------|:---------------------------------------------|
+>| from     | service name           | string        | -              | "web"          | optional                                     |
+>| tid      | transaction ID         | integer       | uint64         | 12345          | :heavy_check_mark:                           |
+>| fc       | function code          | integer       | [1,4]          | 1              | :heavy_check_mark:                           |
+>| ip       | ip address             | string        | -              | 127.0.0.1      | :heavy_check_mark:                           |
+>| port     | port number            | string        | [1,65535]      | 502            | default: 502                                 |
+>| slave    | slave id               | integer       | [1, 253]       | 1              | :heavy_check_mark:                           |
+>| addr     | register start address | integer       | -              | 23             | :heavy_check_mark:                           |
+>| len      | bit/register length    | integer       | -              | 20             | **FC15, 16 only**                            |
+>| type     | data type              | category      | [0,1]          | 0              | default: 0; decimal string(0), hex string(1); **FC6, 16 only** |
+>| data     | data to be write       | string        | hex/dec string | -              | :heavy_check_mark:                           |
+>| status   | response status        | string        | -              | "ok"           | :heavy_check_mark:                           |
+
+#### 1.2.1 services to psmb
+
+**bit write (FC5) - write single bit**
+```JavaScript
+{
+    "from": "web",
+    "tid": 123456,
+	"fc" : 3,
+	"ip": "192.168.0.1",
+	"port": "503",
+	"slave": 1,
+	"addr": 10,
+	"data": "1"
+}
+```
+
+**register write (FC6) - write single register (dec)**
+```JavaScript
+{
+    "from": "web",
+    "tid": 123456,
+	"fc" : 3,
+	"ip": "192.168.0.1",
+	"port": "503",
+	"slave": 1,
+	"addr": 10,
+	"type": 0,
+	"data": "22"
+}
+```
+
+**register write (FC6) - write single register (hex)**
+```JavaScript
+{
+    "from": "web",
+    "tid": 123456,
+	"fc" : 3,
+	"ip": "192.168.0.1",
+	"port": "503",
+	"slave": 1,
+	"addr": 10,
+	"type": 0,
+	"data": "ABCD"
+}
+```
+
+**bits write (FC15) - write multiple bits**
+```JavaScript
+{
+    "from": "web",
+    "tid": 123456,
+	"fc" : 3,
+	"ip": "192.168.0.1",
+	"port": "503",
+	"slave": 1,
+	"addr": 10,
+	"len": 4,
+	"data": "1,0,1,0"
+}
+```
+
+**registers write (FC16) - write multiple registers (dec)**
+```JavaScript
+{
+    "from": "web",
+    "tid": 123456,
+	"fc" : 3,
+	"ip": "192.168.0.1",
+	"port": "503",
+	"slave": 1,
+	"addr": 10,
+	"len": 4,
+	"type": 0,
+	"data": "11,22,33,44"
+}
+```
+
+**registers write (FC16) - write multiple registers (hex)**
+```JavaScript
+{
+    "from": "web",
+    "tid": 123456,
+	"fc" : 3,
+	"ip": "192.168.0.1",
+	"port": "503",
+	"slave": 1,
+	"addr": 10,
+	"len": 4,
+	"type": 0,
+	"data": "ABCD1234EFAB1234"
+}
+```
+
+#### 1.2.2 psmb to services
+
+- success:
+```JavaScript
+{
+	"tid": 123456,
+	"status": "ok"
+}
+```
+
+- fail:
+```JavaScript
+{
+	"tid": 123456,
+	"status": "timeout"
+}
+```
 
 ### 1.3 Get TCP connection timeout
 Command name: **mbtcp.timeout.read**
