@@ -6,6 +6,7 @@
 
 - [0. Multipart message](#0-multipart-message)
 - [1. One-off requests](#1-one-off-requests)
+	- [Data type](#data-type)
 	- [1.1 Read coil/register](#11-read-coilregister)
 		- [1.1.1 To psmb](#111-to-psmb)
 		- [1.1.2 From psmb](#112-from-psmb)
@@ -52,6 +53,19 @@ Thanks to the all-or-nothing characteristics, we can screen what we are interest
 
 ## 1. One-off requests
 
+### Data type
+
+| type| args                                          | description                                   | example                     | note   |
+|:----|:----------------------------------------------|:----------------------------------------------|:----------------------------|:-------|
+| 0   |    -                                          | raw register array (0xABCD hex array)         | [0xABCD, 0x1234, 0xAB12]    | -      |
+| 1   |    -                                          | hexadecimal string                            | "112C004F12345678"          | -      |
+| 2   | order: 0 (big-endian), 1 (little-endian)      | uint16                                        | [123, 456, 789]             | -      |
+| 3   | order: 0 (big-endian), 1 (little-endian)      | int16                                         | [123, 456, 789]             | -      |
+| 4   | order: 0 (ABCD), 1 (DCBA), 2 (BADC), 3 (CDAB) | uint32                                        | [65538, 456, 789]           | len: 2x|
+| 5   | order: 0 (ABCD), 1 (DCBA), 2 (BADC), 3 (CDAB) | int32                                         | [65538, 456, 789]           | len: 2x|
+| 6   | order: 0 (ABCD), 1 (DCBA), 2 (BADC), 3 (CDAB) | float32                                       | [22.34, 33.12, 44.56]       | len: 2x|
+| 7   | range: a (low), b (high), c (low), d (high  ) | linearly scale uint16 to desired range        | [22.34, 33.12, 44.56]       | -      |
+
 ### 1.1 Read coil/register
 Command name: **mbtcp.once.read**
 
@@ -63,24 +77,194 @@ Command name: **mbtcp.once.read**
 | slave    | slave id               | integer       | [1, 253]  | 1           | :heavy_check_mark: |
 | addr     | register start address | integer       | -         | 23          | :heavy_check_mark: |
 | len      | register length        | integer       | -         | 20          | default: 1         |
+| type     | data type              | category      | [0,7]     | see below   | default: 0         |
 | status   | response status        | string        | -         | "ok"        | :heavy_check_mark: |
 | data     | response value         | integer array |           | [1,0,24,1]  | if success         |
 
+
 #### 1.1.1 To psmb
 
+**bits read (FC1,FC2)**
 ```JavaScript
 {
-    "from":
-    "tid:
+    "from": "web",
+    "tid: 123456,
+	"fc" : 1,
+	"ip": "192.168.0.1",
+	"port": "503",
+	"slave": 1,
+	"addr": 10,
+	"len": 4
+}
+```
 
+**register read (FC3,FC4) - type 0, 1 (raw)**
+```JavaScript
+{
+    "from": "web",
+    "tid: 123456,
+	"fc" : 3,
+	"ip": "192.168.0.1",
+	"port": "503",
+	"slave": 1,
+	"addr": 10,
+	"len": 4,
+	"type: 0
+}
+```
+
+**register read (FC3,FC4) - type 2, 3 (16-bit)**
+```JavaScript
+{
+    "from": "web",
+    "tid: 123456,
+	"fc" : 3,
+	"ip": "192.168.0.1",
+	"port": "503",
+	"slave": 1,
+	"addr": 10,
+	"len": 4,
+	"type: 2,
+	"order": 0
+}
+```
+
+**register read (FC3,FC4) - type 4, 5, 6 (32-bit)**
+```JavaScript
+{
+    "from": "web",
+    "tid: 123456,
+	"fc" : 3,
+	"ip": "192.168.0.1",
+	"port": "503",
+	"slave": 1,
+	"addr": 10,
+	"len": 4,
+	"type: 4,
+	"order": 2
+}
+```
+
+**register read (FC3,FC4) - type 7 (scale)**
+```JavaScript
+{
+    "from": "web",
+    "tid: 123456,
+	"fc" : 3,
+	"ip": "192.168.0.1",
+	"port": "503",
+	"slave": 1,
+	"addr": 10,
+	"len": 4,
+	"type: 4,
+	"range": 
+	{
+		"a": 0,
+		"b": 65535,
+		"c": 100,
+		"d": 500
+	}
 }
 ```
 
 #### 1.1.2 From psmb
 
+**bits read (FC1,FC2)**
+
+- success:
 ```JavaScript
-{}
+{
+	"tid": 123456,
+	"status": "ok",
+	"data": [0,1,0,1,0,1]
+}
 ```
+
+- fail:
+```JavaScript
+{
+	"tid": 123456,
+	"status": "timeout"
+}
+```
+
+**register read (FC3,FC4) - type 0, 1 (raw)**
+
+- success - type 0:
+```JavaScript
+{
+	"tid": 123456,
+	"status": "ok",
+	"type: 0,
+	"data": [255, 1234, 789]
+}
+```
+
+- success - type 1:
+```JavaScript
+{
+	"tid": 123456,
+	"status": "ok",
+	"type: 1,
+	"raw": [255, 1234, 789],
+	"data": "112C004F12345678"
+}
+```
+
+- fail:
+```JavaScript
+{
+	"tid": 123456,
+	"status": "timeout"
+}
+```
+
+**register read (FC3,FC4) - type 2, 3 (16-bit)**
+
+- success - type 2:
+```JavaScript
+{
+	"tid": 123456,
+	"status": "ok",
+	"type: 0,
+	"raw": [255, 1234, 789],
+	"data": [255, 1234, 789]
+}
+```
+
+- success - type 3:
+```JavaScript
+{
+	"tid": 123456,
+	"status": "ok",
+	"type: 1,
+	"raw": [65538, 456, 789],
+	"data": [65538, 456, 789]
+}
+```
+
+- fail:
+```JavaScript
+{
+	"tid": 123456,
+	"raw": [65538, 456, 789],
+	"status": "conversion fail"
+}
+```
+
+- fail:
+```JavaScript
+{
+	"tid": 123456,
+	"status": "timeout"
+}
+```
+
+**register read (FC3,FC4) - type 4, 5, 6 (32-bit)**
+**:no_entry:TODO**
+
+**register read (FC3,FC4) - type 7 (scale)**
+**:no_entry:TODO**
 
 ### 1.2 Write coil/register
 Command name: **mbtcp.once.write**
