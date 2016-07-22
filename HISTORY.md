@@ -20,3 +20,7 @@
 - [ ] threshold (FC3, FC4) :question:
 - [ ] scaling :scream:
 - [ ] number and address mapping :fearful:
+
+# TODO
+
+- [ ] support nickname for mqtt, websocket and web service
